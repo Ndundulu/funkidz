@@ -17,7 +17,7 @@ export default function Navbar() {
     ];
 
     return (
-        <header className="w-full border-b bg-white sticky top-0 z-50">
+        <header className="w-full border-b bg-emerald-50 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
                 {/* Logo */}
