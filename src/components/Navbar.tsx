@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link'; // Use this if you're using Next.js
 import { Menu, X, ShoppingCart, User } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,8 +21,15 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
                 {/* Logo */}
-                <Link href="/" className="text-2xl font-bold tracking-tight">
-                    Funkidz
+                <Link href="/" className="flex items-center">
+                    <Image
+                        src= "/funkidz.png"
+                        alt="Funkidz Logo"
+                        width={140}
+                        height={40}
+                        className="h-10 w-auto"
+                        priority
+                    />
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -39,21 +47,21 @@ export default function Navbar() {
 
                 {/* Right Side Icons */}
                 <div className="flex items-center gap-4">
-                    <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <button className="p-2.5 hover:bg-gray-100 rounded-xl transition-all text-gray-800 hover:text-black active:scale-95">
                         <User className="w-5 h-5" />
                     </button>
-                    <button className="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
+
+                    <button className="p-2.5 hover:bg-gray-100 rounded-xl transition-all text-gray-800 hover:text-black active:scale-95 relative">
                         <ShoppingCart className="w-5 h-5" />
-                        {/* Cart count badge */}
-                        <span className="absolute -top-1 -right-1 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-              3
-            </span>
+                        <span className="absolute -top-1 -right-1 bg-rose-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium">
+    3
+  </span>
                     </button>
 
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden p-2 hover:bg-gray-100 rounded-full transition-colors"
+                        className="md:hidden p-2 hover:bg-gray-100 rounded-full transition-all text-gray-700 hover:text-black"
                         aria-label="Toggle menu"
                     >
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
