@@ -33,21 +33,21 @@ export default function Navbar() {
                         <Image
                             src="/funkidz.png"
                             alt="Funkidz Logo"
-                            width={140}
-                            height={40}
-                            className="h-10 w-auto object-contain"
+                            width={130}
+                            height={38}
+                            className="h-9 w-auto object-contain"
                             priority
                         />
                     </Link>
                 </div>
 
-                {/* CENTER: Desktop Navigation Links */}
-                <nav className="hidden lg:flex items-center justify-center gap-x-8 text-base font-semibold text-gray-800">
+                {/* CENTER: Desktop Navigation */}
+                <nav className="hidden lg:flex items-center gap-8 text-base font-medium text-gray-800">
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="hover:text-black transition-colors py-1"
+                            className="hover:text-black transition-colors"
                         >
                             {link.label}
                         </Link>
@@ -55,30 +55,30 @@ export default function Navbar() {
                 </nav>
 
                 {/* RIGHT: Icons */}
-                <div className="flex items-center gap-1 sm:gap-2">
+                <div className="flex items-center gap-2">
                     {/* Search Button */}
                     <button
                         onClick={() => {
                             setIsSearchOpen(!isSearchOpen);
                             if (isOpen) setIsOpen(false);
                         }}
-                        className={`p-2.5 rounded-xl transition-all active:scale-95 ${
-                            isSearchOpen ? 'bg-gray-100' : 'hover:bg-gray-50'
+                        className={`p-2 rounded-lg transition-all active:scale-95 ${
+                            isSearchOpen ? 'bg-gray-100 text-black' : 'hover:bg-gray-50 text-gray-800'
                         }`}
                     >
-                        {isSearchOpen ? <X className="w-6 h-6" /> : <Search className="w-6 h-6" />}
+                        {isSearchOpen ? <X className="w-6 h-6 stroke-[1.75]" /> : <Search className="w-6 h-6 stroke-[1.75]" />}
                     </button>
 
-                    {/* Account Icon - Desktop only */}
+                    {/* Account Icon - Only on large screens */}
                     <Link
                         href="/account"
-                        className="hidden lg:flex p-2.5 hover:bg-gray-50 rounded-xl transition-all text-gray-800"
+                        className="hidden lg:block p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800"
                     >
                         <User className="w-6 h-6" />
                     </Link>
 
                     {/* Cart Icon */}
-                    <button className="p-2.5 hover:bg-gray-50 rounded-xl transition-all text-gray-800 active:scale-95 relative flex items-center justify-center">
+                    <button className="p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800 active:scale-95 relative flex items-center justify-center">
                         <svg
                             viewBox="0 0 100 100"
                             className="w-8 h-8 fill-none stroke-current"
@@ -98,9 +98,9 @@ export default function Navbar() {
                             <path d="M79 25 L76 68" />
                             <path d="M36 39 L86 39" />
                             <path d="M37 54 L83 54" />
-                            <ellipse cx="60" cy="17" rx="4" ry="8" strokeWidth="3" />
+                            <ellipse cx="60" cy="17" rx="4" ry="8" className="fill-none" strokeWidth="3" />
                         </svg>
-                        <span className="absolute -top-0.5 -right-0.5 bg-black text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                        <span className="absolute top-1 right-1 bg-black text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
                             3
                         </span>
                     </button>
@@ -111,56 +111,57 @@ export default function Navbar() {
                             setIsOpen(!isOpen);
                             if (isSearchOpen) setIsSearchOpen(false);
                         }}
-                        className="lg:hidden p-2.5 hover:bg-gray-50 rounded-xl transition-all text-gray-800"
-                        aria-label="Toggle menu"
+                        className="lg:hidden p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800"
                     >
                         {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
                     </button>
                 </div>
             </div>
 
-            {/* EXPANDABLE SEARCH BAR */}
+            {/* Search Bar - Original Style */}
             <div
-                className={`w-full bg-white border-t border-b border-gray-200 absolute left-0 transition-all duration-300 z-10 ${
-                    isSearchOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'
+                className={`w-full bg-white border-t border-b border-gray-200 absolute left-0 transition-all duration-300 ease-in-out origin-top z-10 ${
+                    isSearchOpen
+                        ? 'opacity-100 translate-y-0 visible pointer-events-auto'
+                        : 'opacity-0 -translate-y-4 invisible pointer-events-none'
                 }`}
             >
-                <div className="max-w-3xl mx-auto px-4 py-4">
-                    <form onSubmit={(e) => e.preventDefault()} className="relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-500" />
+                <div className="max-w-3xl mx-auto px-4 py-3">
+                    <form onSubmit={(e) => e.preventDefault()} className="relative flex items-center">
+                        <Search className="absolute left-2 w-6 h-6 text-black stroke-[2]" />
                         <input
                             ref={searchInputRef}
                             type="text"
-                            placeholder="Search for products..."
-                            className="w-full bg-gray-50 border border-gray-200 pl-12 pr-4 py-3.5 rounded-2xl text-base focus:outline-none focus:border-black"
+                            placeholder="Search for..."
+                            className="w-full bg-transparent pl-11 pr-4 py-3 text-black font-medium text-lg placeholder-gray-500 focus:outline-none transition-all"
                         />
                     </form>
                 </div>
             </div>
 
-            {/* MOBILE MENU */}
+            {/* Mobile Menu */}
             {isOpen && (
-                <div className="lg:hidden border-t bg-white shadow-xl absolute left-0 w-full z-10">
-                    <nav className="flex flex-col py-6 px-6 space-y-4">
+                <div className="lg:hidden border-t border-gray-100 bg-white shadow-xl absolute left-0 w-full z-10">
+                    <nav className="flex flex-col py-4 px-6 space-y-3">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className="font-semibold text-lg py-3 text-gray-800 hover:text-black transition-all"
+                                className="font-medium text-lg py-2.5 text-gray-700 hover:text-black hover:translate-x-1 transition-all block"
                                 onClick={() => setIsOpen(false)}
                             >
                                 {link.label}
                             </Link>
                         ))}
 
-                        {/* Account inside Mobile Menu */}
+                        {/* Account inside mobile menu */}
                         <Link
                             href="/account"
-                            className="flex items-center gap-3 pt-6 mt-4 border-t border-gray-200 text-gray-800 hover:text-black"
+                            className="flex items-center gap-3 pt-4 mt-4 border-t border-gray-200 text-gray-700 hover:text-black"
                             onClick={() => setIsOpen(false)}
                         >
-                            <User className="w-6 h-6" />
-                            <span className="font-semibold text-lg">My Account</span>
+                            <User className="w-5 h-5" />
+                            <span className="font-medium text-lg">Account</span>
                         </Link>
                     </nav>
                 </div>
