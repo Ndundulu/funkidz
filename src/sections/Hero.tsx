@@ -26,7 +26,7 @@ export default function HeroSlider() {
             tagline: "MODERN & SUSTAINABLE ECO-DESIGN",
             buttonText: "SHOP NOW",
             link: "/shop/moss",
-            imageLeft: "/bed1.jpg",
+            imageLeft: "/backgroundcv.jpg",
             imageRight: "/backgroundcv.jpg",
         },
         {
@@ -36,7 +36,7 @@ export default function HeroSlider() {
             buttonText: "EXPLORE SERIES",
             link: "/shop",
             imageLeft: "/backgroundcv.jpg",
-            imageRight: "/red.png",
+            imageRight: "/backgroundcv.jpg",
         },
         {
             id: 3,
@@ -44,7 +44,7 @@ export default function HeroSlider() {
             tagline: "SUSTAINABLE ARCHITECTURE FOR SCHOOLS",
             buttonText: "LEARN MORE",
             link: "/schools",
-            imageLeft: "/kitchen1.jpg",
+            imageLeft: "/backgroundcv.jpg",
             imageRight: "/backgroundcv.jpg",
         }
     ];
