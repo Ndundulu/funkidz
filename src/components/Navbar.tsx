@@ -17,7 +17,6 @@ export default function Navbar() {
         { href: '/contact', label: 'Contact' },
     ];
 
-    // Auto-focus search input
     useEffect(() => {
         if (isSearchOpen && searchInputRef.current) {
             searchInputRef.current.focus();
@@ -28,48 +27,34 @@ export default function Navbar() {
         <header className="w-full bg-white sticky top-0 z-50 border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between relative bg-white">
 
-                {/* LEFT: Mobile Menu Button (Hidden on large screens) */}
-                <div className="lg:hidden flex items-center">
-                    <button
-                        onClick={() => {
-                            setIsOpen(!isOpen);
-                            if (isSearchOpen) setIsSearchOpen(false);
-                        }}
-                        className="p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800"
-                        aria-label="Toggle menu"
-                    >
-                        {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-                    </button>
-                </div>
-
-                {/* CENTER: Logo */}
-                <div className="flex-1 flex justify-center lg:justify-start">
+                {/* LEFT: Logo */}
+                <div className="flex-shrink-0">
                     <Link href="/" className="flex items-center">
                         <Image
                             src="/funkidz.png"
                             alt="Funkidz Logo"
-                            width={130}
-                            height={38}
-                            className="h-9 w-auto object-contain"
+                            width={140}
+                            height={40}
+                            className="h-10 w-auto object-contain"
                             priority
                         />
                     </Link>
                 </div>
 
-                {/* DESKTOP NAVIGATION (Hidden on mobile) */}
-                <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
+                {/* CENTER: Desktop Navigation Links */}
+                <nav className="hidden lg:flex items-center justify-center gap-x-8 text-base font-semibold text-gray-800">
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="hover:text-black transition-colors"
+                            className="hover:text-black transition-colors py-1"
                         >
                             {link.label}
                         </Link>
                     ))}
                 </nav>
 
-                {/* RIGHT SIDE: Icons */}
+                {/* RIGHT: Icons */}
                 <div className="flex items-center gap-1 sm:gap-2">
                     {/* Search Button */}
                     <button
@@ -77,23 +62,23 @@ export default function Navbar() {
                             setIsSearchOpen(!isSearchOpen);
                             if (isOpen) setIsOpen(false);
                         }}
-                        className={`p-2 rounded-lg transition-all active:scale-95 ${
-                            isSearchOpen ? 'bg-gray-100 text-black' : 'hover:bg-gray-50 text-gray-800'
+                        className={`p-2.5 rounded-xl transition-all active:scale-95 ${
+                            isSearchOpen ? 'bg-gray-100' : 'hover:bg-gray-50'
                         }`}
                     >
                         {isSearchOpen ? <X className="w-6 h-6" /> : <Search className="w-6 h-6" />}
                     </button>
 
-                    {/* Account Icon - Visible only on large screens */}
+                    {/* Account Icon - Desktop only */}
                     <Link
                         href="/account"
-                        className="hidden lg:block p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800"
+                        className="hidden lg:flex p-2.5 hover:bg-gray-50 rounded-xl transition-all text-gray-800"
                     >
                         <User className="w-6 h-6" />
                     </Link>
 
                     {/* Cart Icon */}
-                    <button className="p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800 active:scale-95 relative">
+                    <button className="p-2.5 hover:bg-gray-50 rounded-xl transition-all text-gray-800 active:scale-95 relative flex items-center justify-center">
                         <svg
                             viewBox="0 0 100 100"
                             className="w-8 h-8 fill-none stroke-current"
@@ -119,25 +104,35 @@ export default function Navbar() {
                             3
                         </span>
                     </button>
+
+                    {/* Mobile Menu Button */}
+                    <button
+                        onClick={() => {
+                            setIsOpen(!isOpen);
+                            if (isSearchOpen) setIsSearchOpen(false);
+                        }}
+                        className="lg:hidden p-2.5 hover:bg-gray-50 rounded-xl transition-all text-gray-800"
+                        aria-label="Toggle menu"
+                    >
+                        {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+                    </button>
                 </div>
             </div>
 
             {/* EXPANDABLE SEARCH BAR */}
             <div
-                className={`w-full bg-white border-t border-b border-gray-200 absolute left-0 transition-all duration-300 ease-in-out z-10 ${
-                    isSearchOpen
-                        ? 'opacity-100 translate-y-0 visible'
-                        : 'opacity-0 -translate-y-4 invisible pointer-events-none'
+                className={`w-full bg-white border-t border-b border-gray-200 absolute left-0 transition-all duration-300 z-10 ${
+                    isSearchOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'
                 }`}
             >
-                <div className="max-w-3xl mx-auto px-4 py-3">
-                    <form onSubmit={(e) => e.preventDefault()} className="relative flex items-center">
-                        <Search className="absolute left-3 w-6 h-6 text-black" />
+                <div className="max-w-3xl mx-auto px-4 py-4">
+                    <form onSubmit={(e) => e.preventDefault()} className="relative">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-500" />
                         <input
                             ref={searchInputRef}
                             type="text"
-                            placeholder="Search for..."
-                            className="w-full bg-transparent pl-12 pr-4 py-3 text-lg placeholder-gray-500 focus:outline-none"
+                            placeholder="Search for products..."
+                            className="w-full bg-gray-50 border border-gray-200 pl-12 pr-4 py-3.5 rounded-2xl text-base focus:outline-none focus:border-black"
                         />
                     </form>
                 </div>
@@ -145,27 +140,27 @@ export default function Navbar() {
 
             {/* MOBILE MENU */}
             {isOpen && (
-                <div className="lg:hidden border-t border-gray-100 bg-white shadow-xl absolute left-0 w-full z-10">
+                <div className="lg:hidden border-t bg-white shadow-xl absolute left-0 w-full z-10">
                     <nav className="flex flex-col py-6 px-6 space-y-4">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className="font-medium text-lg py-3 text-gray-700 hover:text-black transition-all"
+                                className="font-semibold text-lg py-3 text-gray-800 hover:text-black transition-all"
                                 onClick={() => setIsOpen(false)}
                             >
                                 {link.label}
                             </Link>
                         ))}
 
-                        {/* Account Link inside Mobile Menu */}
+                        {/* Account inside Mobile Menu */}
                         <Link
                             href="/account"
-                            className="flex items-center gap-3 pt-4 mt-4 border-t border-gray-200 text-gray-700 hover:text-black"
+                            className="flex items-center gap-3 pt-6 mt-4 border-t border-gray-200 text-gray-800 hover:text-black"
                             onClick={() => setIsOpen(false)}
                         >
-                            <User className="w-5 h-5" />
-                            <span className="font-medium text-lg">Account</span>
+                            <User className="w-6 h-6" />
+                            <span className="font-semibold text-lg">My Account</span>
                         </Link>
                     </nav>
                 </div>
