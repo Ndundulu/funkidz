@@ -8,7 +8,7 @@ import Image from 'next/image';
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const searchInputRef = useRef(null);
+    const searchInputRef = useRef<HTMLInputElement>(null);
 
     const navLinks = [
         { href: '/', label: 'Home' },
