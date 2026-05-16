@@ -1,12 +1,14 @@
-"use client"; // <--- Add this exact line right here at the very top!
+"use client";
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, Search } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const searchInputRef = useRef(null);
 
     const navLinks = [
         { href: '/', label: 'Home' },
@@ -16,15 +18,25 @@ export default function Navbar() {
         { href: '/contact', label: 'Contact' },
     ];
 
+    // Automatically focus the input field when the search bar pops open
+    useEffect(() => {
+        if (isSearchOpen && searchInputRef.current) {
+            searchInputRef.current.focus();
+        }
+    }, [isSearchOpen]);
+
     return (
         <header className="w-full bg-white sticky top-0 z-50 border-b border-gray-100">
             {/* Main Navigation Container */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between relative">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between relative z-20 bg-white">
 
                 {/* LEFT: Mobile Menu Button */}
                 <div className="flex items-center w-1/4 justify-start">
                     <button
-                        onClick={() => setIsOpen(!isOpen)}
+                        onClick={() => {
+                            setIsOpen(!isOpen);
+                            if (isSearchOpen) setIsSearchOpen(false); // Close search if menu opens
+                        }}
                         className="p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800"
                         aria-label="Toggle menu"
                     >
@@ -48,9 +60,17 @@ export default function Navbar() {
 
                 {/* RIGHT: Search and Custom Sketched Cart Icon */}
                 <div className="flex items-center justify-end gap-2 sm:gap-4 w-1/4">
-                    {/* Search Button */}
-                    <button className="p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800 active:scale-95">
-                        <Search className="w-6 h-6 stroke-[1.75]" />
+                    {/* Search Toggle Button */}
+                    <button
+                        onClick={() => {
+                            setIsSearchOpen(!isSearchOpen);
+                            if (isOpen) setIsOpen(false); // Close mobile menu if search opens
+                        }}
+                        className={`p-2 rounded-lg transition-all active:scale-95 ${
+                            isSearchOpen ? 'bg-gray-100 text-black' : 'hover:bg-gray-50 text-gray-800'
+                        }`}
+                    >
+                        {isSearchOpen ? <X className="w-6 h-6 stroke-[1.75]" /> : <Search className="w-6 h-6 stroke-[1.75]" />}
                     </button>
 
                     {/* Custom Sketched Shopping Cart Button */}
@@ -84,9 +104,30 @@ export default function Navbar() {
                 </div>
             </div>
 
+            {/* EXPANDABLE SEARCH BAR (Pops below the Nav bar) */}
+            <div
+                className={`w-full bg-gray-50 border-t border-b border-gray-200 absolute left-0 transition-all duration-300 ease-in-out origin-top z-10 ${
+                    isSearchOpen
+                        ? 'opacity-100 translate-y-0 visible pointer-events-auto'
+                        : 'opacity-0 -translate-y-4 invisible pointer-events-none'
+                }`}
+            >
+                <div className="max-w-3xl mx-auto px-4 py-4">
+                    <form onSubmit={(e) => e.preventDefault()} className="relative flex items-center">
+                        <Search className="absolute left-4 w-5 h-5 text-gray-400 pointer-events-none" />
+                        <input
+                            ref={searchInputRef}
+                            type="text"
+                            placeholder="Search products, brands, schools..."
+                            className="w-full bg-white pl-12 pr-4 py-3 rounded-xl border border-gray-200 text-base focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all shadow-sm"
+                        />
+                    </form>
+                </div>
+            </div>
+
             {/* Mobile Navigation Drawer */}
             {isOpen && (
-                <div className="border-t border-gray-100 bg-white shadow-xl animate-in fade-in slide-in-from-top-4 duration-200">
+                <div className="border-t border-gray-100 bg-white shadow-xl absolute left-0 w-full z-10">
                     <nav className="flex flex-col py-4 px-6 space-y-3">
                         {navLinks.map((link) => (
                             <Link
