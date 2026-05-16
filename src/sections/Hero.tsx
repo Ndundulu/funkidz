@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
 
@@ -16,6 +16,8 @@ interface Slide {
 
 export default function HeroSlider() {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const slides: Slide[] = [
         {
@@ -24,7 +26,7 @@ export default function HeroSlider() {
             tagline: "MODERN & SUSTAINABLE ECO-DESIGN",
             buttonText: "SHOP NOW",
             link: "/shop/moss",
-            imageLeft: "/backgroundcv.jpg", // Replace with your image paths
+            imageLeft: "/backgroundcv.jpg",
             imageRight: "/backgroundcv.jpg",
         },
         {
@@ -47,137 +49,144 @@ export default function HeroSlider() {
         }
     ];
 
-    const SLIDE_DURATION = 6000; // 6 seconds per slide
+    const SLIDE_DURATION = 6000; // 6 seconds
+
+    const resetTimeout = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+    };
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
+        resetTimeout();
+        timeoutRef.current = setTimeout(() => {
+            handleSlideChange((currentSlide + 1) % slides.length);
         }, SLIDE_DURATION);
-        return () => clearInterval(timer);
-    }, [slides.length]);
+
+        return () => resetTimeout();
+    }, [currentSlide]);
+
+    const handleSlideChange = (nextIndex: number) => {
+        if (nextIndex === currentSlide) return;
+        setIsTransitioning(true);
+
+        // Wait for slide downward exit animation before switching data content
+        setTimeout(() => {
+            setCurrentSlide(nextIndex);
+            setIsTransitioning(false);
+        }, 800); // Slower, elegant transition window
+    };
 
     return (
-        <section className="relative w-full h-[85vh] min-h-[550px] bg-white overflow-visible border-b border-gray-100">
-            {/* Custom Animation Styles Injection */}
+        <section className="relative w-full h-[75vh] min-h-[500px] max-h-[750px] bg-white overflow-hidden pb-12">
+            {/* Custom SVG Radial Keyframe Animation */}
             <style jsx global>{`
-                @keyframes blink-in {
-                    0% { opacity: 0; }
-                    10%, 90% { opacity: 1; }
-                    100% { opacity: 0; }
+                @keyframes dash {
+                    from { stroke-dashoffset: 56.54; }
+                    to { stroke-dashoffset: 0; }
                 }
-                @keyframes text-up-down {
-                    0% { transform: translateY(20px); opacity: 0; }
-                    8% { transform: translateY(0); opacity: 1; }
-                    92% { transform: translateY(0); opacity: 1; }
-                    100% { transform: translateY(20px); opacity: 0; }
-                }
-                @keyframes loader-progress {
-                    0% { width: 0%; }
-                    100% { width: 100%; }
-                }
-                .animate-blink-frame {
-                    animation: blink-in ${SLIDE_DURATION}ms ease-in-out infinite;
-                }
-                .animate-text-frame {
-                    animation: text-up-down ${SLIDE_DURATION}ms cubic-bezier(0.25, 1, 0.5, 1) infinite;
-                }
-                .animate-loader {
-                    animation: loader-progress ${SLIDE_DURATION}ms linear infinite;
+                .animate-svg-loading {
+                    stroke-dasharray: 56.54;
+                    animation: dash ${SLIDE_DURATION}ms linear forwards;
                 }
             `}</style>
 
             {/* Slide Frame Track Container */}
-            <div className="absolute inset-0 w-full h-full overflow-hidden">
-                {slides.map((slide, index) => {
-                    if (index !== currentSlide) return null;
+            <div className="relative w-full h-full overflow-hidden px-4 sm:px-8 md:px-12">
+                <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 relative rounded-sm overflow-hidden">
 
-                    return (
-                        <div key={slide.id} className="absolute inset-0 w-full h-full grid grid-cols-1 md:grid-cols-2 animate-blink-frame">
+                    {/* LEFT SIDE: Image + Text Card Overlay */}
+                    <div className="relative w-full h-full overflow-hidden bg-gray-50">
+                        <Image
+                            src={slides[currentSlide].imageLeft}
+                            alt={`${slides[currentSlide].title} left view`}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover object-center transition-transform duration-1000 ease-out"
+                            priority
+                        />
 
-                            {/* LEFT SIDE: Image + Text Card Overlay */}
-                            <div className="relative w-full h-full overflow-hidden">
-                                <Image
-                                    src={slide.imageLeft}
-                                    alt={`${slide.title} left view`}
-                                    fill
-                                    sizes="(max-w-768px) 100vw, 50vw"
-                                    className="object-cover object-center"
-                                    priority
-                                />
-
-                                {/* Exact Hero.jpeg Floating Card Layout */}
-                                <div className="absolute inset-0 flex items-start pt-[12vh] sm:pt-[15vh] px-6 sm:px-12 z-10">
-                                    <div className="bg-white/95 backdrop-blur-sm px-10 py-12 sm:px-14 sm:py-14 text-center max-w-md shadow-sm border border-gray-100/30 animate-text-frame">
-                                        <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gray-500 font-semibold mb-4">
-                                            {slide.tagline}
-                                        </p>
-                                        <h1 className="text-2xl sm:text-4xl font-serif text-gray-900 tracking-tight leading-tight mb-8">
-                                            {slide.title}
-                                        </h1>
-                                        <a
-                                            href={slide.link}
-                                            className="inline-block font-medium tracking-[0.15em] text-xs text-gray-900 border-b-2 border-black pb-1 hover:text-gray-500 hover:border-gray-400 transition-colors"
-                                        >
-                                            {slide.buttonText}
-                                        </a>
-                                    </div>
-                                </div>
+                        {/* Elegant Text Card Container with deliberate up/down motion bounds */}
+                        <div className="absolute inset-0 flex items-center justify-center md:justify-start px-6 sm:px-12 z-10">
+                            <div className={`bg-white/95 backdrop-blur-sm px-8 py-10 sm:px-12 sm:py-14 text-center max-w-sm shadow-md border border-gray-100/20 transform transition-all duration-1000 cubic-bezier(0.25, 1, 0.5, 1) ${
+                                isTransitioning
+                                    ? 'translate-y-[100%] opacity-0'
+                                    : 'translate-y-0 opacity-100'
+                            }`}>
+                                <p className="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-medium mb-3">
+                                    {slides[currentSlide].tagline}
+                                </p>
+                                <h1 className="text-xl sm:text-3xl font-serif text-gray-900 tracking-tight leading-tight mb-6">
+                                    {slides[currentSlide].title}
+                                </h1 >
+                                <a
+                                    href={slides[currentSlide].link}
+                                    className="inline-block font-semibold tracking-[0.15em] text-[11px] text-gray-900 border-b border-black pb-1 hover:text-gray-500 hover:border-gray-400 transition-colors"
+                                >
+                                    {slides[currentSlide].buttonText}
+                                </a>
                             </div>
-
-                            {/* RIGHT SIDE: Standalone Image (Visible only on medium/large viewports) */}
-                            <div className="relative w-full h-full hidden md:block border-l border-white/10">
-                                <Image
-                                    src={slide.imageRight}
-                                    alt={`${slide.title} right view`}
-                                    fill
-                                    sizes="50vw"
-                                    className="object-cover object-center"
-                                />
-                            </div>
-
                         </div>
-                    );
-                })}
+                    </div>
+
+                    {/* RIGHT SIDE: Standalone Secondary Image Split Frame */}
+                    <div className="relative w-full h-full hidden md:block bg-gray-100 border-l border-white/20">
+                        <Image
+                            src={slides[currentSlide].imageRight}
+                            alt={`${slides[currentSlide].title} right view`}
+                            fill
+                            sizes="50vw"
+                            className="object-cover object-center"
+                        />
+                    </div>
+                </div>
             </div>
 
-            {/* INTERACTIVE ACTIONS CONTAINER */}
-            {/* Max-w matches your navbar limits precisely */}
-            <div className="absolute bottom-0 left-0 right-0 z-30 max-w-7xl mx-auto px-6 sm:px-12 flex items-end justify-between pointer-events-none h-20">
+            {/* FIXED CENTER ARROW: Pulled outside content bands for exact geometric centering */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-30 translate-y-1/2">
+                <button
+                    onClick={() => window.scrollBy({ top: window.innerHeight * 0.7, behavior: 'smooth' })}
+                    className="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-105 transition-transform text-gray-600 hover:text-black border border-gray-200/80"
+                    aria-label="Scroll down"
+                >
+                    <ChevronDown className="w-5 h-5 stroke-[1.5]" />
+                </button>
+            </div>
 
-                {/* Spacer block to perfectly frame left alignment bounds */}
-                <div className="w-12 hidden sm:block"></div>
-
-                {/* CENTRAL BOTTOM CUE: Positioned EXACTLY halfway overlapping the frame edge */}
-                <div className="relative flex justify-center items-center h-full w-full sm:w-auto">
-                    <button
-                        onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
-                        className="pointer-events-auto w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform text-gray-800 hover:text-black border border-gray-200/60 translate-y-1/2"
-                        aria-label="Scroll down"
-                    >
-                        <ChevronDown className="w-6 h-6 stroke-[1.5]" />
-                    </button>
-                </div>
-
-                {/* RIGHT ELEMENT: Gray Tracking Bars + White Loading Line Animation Timer */}
-                <div className="pointer-events-auto flex items-center gap-3 bg-white/40 backdrop-blur-md px-4 py-2.5 rounded-full sm:bg-transparent sm:p-0 mb-4 sm:mb-6">
-                    {slides.map((_, index) => (
-                        <div
+            {/* RADIAL LOADER DOTS CORNER NAVIGATION */}
+            <div className="absolute bottom-4 right-6 sm:right-14 z-30 flex items-center gap-4 bg-white/60 backdrop-blur-sm sm:bg-transparent px-3 py-2 rounded-full">
+                {slides.map((_, index) => {
+                    const isActive = index === currentSlide;
+                    return (
+                        <button
                             key={index}
-                            onClick={() => setCurrentSlide(index)}
-                            className="group relative h-1 w-8 sm:w-12 bg-gray-300 rounded-full cursor-pointer overflow-hidden transition-all"
-                            role="button"
-                            aria-label={`Show slide ${index + 1}`}
+                            onClick={() => handleSlideChange(index)}
+                            className="relative w-[22px] h-[22px] flex items-center justify-center focus:outline-none group"
+                            aria-label={`Go to slide ${index + 1}`}
                         >
-                            {/* Inner loading track indicator */}
-                            <div
-                                className={`absolute inset-y-0 left-0 bg-white sm:bg-gray-900 rounded-full transition-all ${
-                                    index === currentSlide ? 'animate-loader w-full' : 'w-0'
-                                }`}
-                            />
-                        </div>
-                    ))}
-                </div>
+                            {/* Static Background circle tray */}
+                            <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                                isActive ? 'bg-white' : 'bg-gray-400/70 group-hover:bg-gray-600'
+                            }`} />
 
+                            {/* Animated circular track overlay */}
+                            {isActive && (
+                                <svg className="absolute inset-0 w-full h-full transform -rotate-90">
+                                    <circle
+                                        cx="11"
+                                        cy="11"
+                                        r="9"
+                                        className="animate-svg-loading"
+                                        stroke="white"
+                                        strokeWidth="2"
+                                        fill="transparent"
+                                        strokeLinecap="round"
+                                    />
+                                </svg>
+                            )}
+                        </button>
+                    );
+                })}
             </div>
         </section>
     );
