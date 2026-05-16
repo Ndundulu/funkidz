@@ -106,20 +106,22 @@ export default function Navbar() {
 
             {/* EXPANDABLE SEARCH BAR (Pops below the Nav bar) */}
             <div
-                className={`w-full bg-gray-50 border-t border-b border-gray-200 absolute left-0 transition-all duration-300 ease-in-out origin-top z-10 ${
+                className={`w-full bg-white border-t border-b border-gray-200 absolute left-0 transition-all duration-300 ease-in-out origin-top z-10 ${
                     isSearchOpen
                         ? 'opacity-100 translate-y-0 visible pointer-events-auto'
                         : 'opacity-0 -translate-y-4 invisible pointer-events-none'
                 }`}
             >
-                <div className="max-w-3xl mx-auto px-4 py-4">
+                <div className="max-w-3xl mx-auto px-4 py-3">
                     <form onSubmit={(e) => e.preventDefault()} className="relative flex items-center">
-                        <Search className="absolute left-4 w-5 h-5 text-gray-400 pointer-events-none" />
+                        {/* Clean, high-visibility search icon sitting openly */}
+                        <Search className="absolute left-2 w-6 h-6 text-black stroke-[2]" />
+
                         <input
                             ref={searchInputRef}
                             type="text"
-                            placeholder="Search products, brands, schools..."
-                            className="w-full bg-white pl-12 pr-4 py-3 rounded-xl border border-gray-200 text-base focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all shadow-sm"
+                            placeholder="Search for..."
+                            className="w-full bg-transparent pl-11 pr-4 py-3 text-black font-medium text-lg placeholder-gray-500 focus:outline-none transition-all"
                         />
                     </form>
                 </div>
