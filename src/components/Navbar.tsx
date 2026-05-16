@@ -27,8 +27,21 @@ export default function Navbar() {
         <header className="w-full bg-white sticky top-0 z-50 border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between relative bg-white">
 
-                {/* LEFT: Logo */}
-                <div className="flex-shrink-0">
+                {/* LEFT: Mobile Menu Button */}
+                <div className="flex items-center lg:hidden">
+                    <button
+                        onClick={() => {
+                            setIsOpen(!isOpen);
+                            if (isSearchOpen) setIsSearchOpen(false);
+                        }}
+                        className="p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800"
+                    >
+                        {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+                    </button>
+                </div>
+
+                {/* CENTER: Logo - Centered on Mobile, Left on Desktop */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0">
                     <Link href="/" className="flex items-center">
                         <Image
                             src="/funkidz.png"
@@ -40,19 +53,6 @@ export default function Navbar() {
                         />
                     </Link>
                 </div>
-
-                {/* CENTER: Desktop Navigation */}
-                <nav className="hidden lg:flex items-center gap-8 text-base font-medium text-gray-800">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className="hover:text-black transition-colors"
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
-                </nav>
 
                 {/* RIGHT: Icons */}
                 <div className="flex items-center gap-2">
@@ -69,7 +69,7 @@ export default function Navbar() {
                         {isSearchOpen ? <X className="w-6 h-6 stroke-[1.75]" /> : <Search className="w-6 h-6 stroke-[1.75]" />}
                     </button>
 
-                    {/* Account Icon - Only on large screens */}
+                    {/* Account Icon - Desktop only */}
                     <Link
                         href="/account"
                         className="hidden lg:block p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800"
@@ -105,20 +105,24 @@ export default function Navbar() {
                         </span>
                     </button>
 
-                    {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => {
-                            setIsOpen(!isOpen);
-                            if (isSearchOpen) setIsSearchOpen(false);
-                        }}
-                        className="lg:hidden p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800"
-                    >
-                        {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-                    </button>
+                    {/* Desktop Navigation is handled separately below */}
                 </div>
+
+                {/* DESKTOP NAVIGATION - Center on large screens */}
+                <nav className="hidden lg:flex items-center gap-8 text-base font-medium text-gray-800 absolute left-1/2 -translate-x-1/2">
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className="hover:text-black transition-colors"
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                </nav>
             </div>
 
-            {/* Search Bar - Original Style */}
+            {/* EXPANDABLE SEARCH BAR - Original Style */}
             <div
                 className={`w-full bg-white border-t border-b border-gray-200 absolute left-0 transition-all duration-300 ease-in-out origin-top z-10 ${
                     isSearchOpen
@@ -139,7 +143,7 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/* Mobile Menu */}
+            {/* MOBILE MENU */}
             {isOpen && (
                 <div className="lg:hidden border-t border-gray-100 bg-white shadow-xl absolute left-0 w-full z-10">
                     <nav className="flex flex-col py-4 px-6 space-y-3">
@@ -154,7 +158,6 @@ export default function Navbar() {
                             </Link>
                         ))}
 
-                        {/* Account inside mobile menu */}
                         <Link
                             href="/account"
                             className="flex items-center gap-3 pt-4 mt-4 border-t border-gray-200 text-gray-700 hover:text-black"
