@@ -82,7 +82,7 @@ export default function HeroSlider() {
             <style jsx global>{`
                 @keyframes progress-fill {
                     from {
-                        stroke-dashoffset: 31.4;
+                        stroke-dashoffset: 44;
                     }
                     to {
                         stroke-dashoffset: 0;
@@ -108,7 +108,8 @@ export default function HeroSlider() {
                             priority
                         />
 
-                        <div className="absolute inset-0 flex items-center justify-center md:justify-start px-12 z-10">
+                        {/* Top-aligned wrapper stops the text card from blocking your layout imagery */}
+                        <div className="absolute inset-0 flex items-start justify-center md:justify-start pt-10 px-6 sm:px-12 z-10">
                             <div className={`bg-white/95 backdrop-blur-sm px-8 py-10 sm:px-12 sm:py-14 text-center max-w-sm shadow-md border border-gray-100/20 transform transition-all duration-1000 cubic-bezier(0.25, 1, 0.5, 1) ${
                                 isTransitioning ? 'translate-y-[100%] opacity-0' : 'translate-y-0 opacity-100'
                             }`}>
@@ -140,47 +141,43 @@ export default function HeroSlider() {
                     </div>
                 </div>
 
-                {/* LOADER DOTS */}
-                <div className="absolute bottom-6 right-8 sm:right-12 z-30 flex items-center gap-3 select-none">
+                {/* LOADER DOTS WITH BALANCED BASE OVERLAYS */}
+                <div className="absolute bottom-6 right-8 sm:right-12 z-30 flex items-center gap-4 select-none">
                     {slides.map((_, index) => {
                         const isActive = index === currentSlide;
                         return (
                             <button
                                 key={index}
                                 onClick={() => handleSlideChange(index)}
-                                className="relative w-2 h-2 flex items-center justify-center focus:outline-none group transition-transform active:scale-95"
+                                className="relative w-4 h-4 flex items-center justify-center focus:outline-none group transition-transform active:scale-95"
                                 aria-label={`Go to slide ${index + 1}`}
                             >
                                 {isActive ? (
-                                    <svg
-                                        className="w-full h-full -rotate-90"
-                                        viewBox="0 0 12 12"
-                                    >
-                                        {/* Grey Background Track */}
-                                        <circle
-                                            cx="6"
-                                            cy="6"
-                                            r="5"
-                                            stroke="#d1d5db"
-                                            strokeWidth="1.5"
-                                            fill="transparent"
-                                        />
-                                        {/* White Progress Ring (Fills up) */}
-                                        <circle
-                                            cx="6"
-                                            cy="6"
-                                            r="5"
-                                            stroke="#ffffff"
-                                            strokeWidth="1.5"
-                                            fill="transparent"
-                                            strokeLinecap="round"
-                                            strokeDasharray="31.4"
-                                            strokeDashoffset="31.4"
-                                            className="animate-progress"
-                                        />
-                                    </svg>
+                                    <div className="relative w-4 h-4 flex items-center justify-center">
+                                        {/* Underlying standard gray solid dot footprint */}
+                                        <div className="absolute w-2 h-2 rounded-full bg-gray-400" />
+
+                                        {/* Active SVG Ring wrapper scaled dynamically around the dot */}
+                                        <svg
+                                            className="absolute w-4 h-4 -rotate-90 z-10"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <circle
+                                                cx="8"
+                                                cy="8"
+                                                r="7"
+                                                stroke="#ffffff"
+                                                strokeWidth="2"
+                                                fill="transparent"
+                                                strokeLinecap="round"
+                                                strokeDasharray="44"
+                                                strokeDashoffset="44"
+                                                className="animate-progress"
+                                            />
+                                        </svg>
+                                    </div>
                                 ) : (
-                                    <div className="w-2 h-2 rounded-full bg-gray-400/70 group-hover:bg-white transition-all duration-300" />
+                                    <div className="w-2 h-2 rounded-full bg-gray-400 transition-all duration-300 group-hover:bg-white" />
                                 )}
                             </button>
                         );
