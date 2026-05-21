@@ -26,8 +26,8 @@ export default function HeroSlider() {
             tagline: "MODERN & SUSTAINABLE ECO-DESIGN",
             buttonText: "SHOP NOW",
             link: "/shop/moss",
-            imageLeft: "/backgroundcv.jpg",
-            imageRight: "/backgroundcv.jpg",
+            imageLeft: "/backcover5.jpg",
+            imageRight: "/mirror.jpg",
         },
         {
             id: 2,
@@ -35,8 +35,8 @@ export default function HeroSlider() {
             tagline: "MADE-TO-ORDER PREMIUM CRAFTSMANSHIP",
             buttonText: "EXPLORE SERIES",
             link: "/shop",
-            imageLeft: "/backgroundcv.jpg",
-            imageRight: "/backgroundcv.jpg",
+            imageLeft: "/babyroom.jpg",
+            imageRight: "/doubledocker.jpg",
         },
         {
             id: 3,
@@ -44,8 +44,8 @@ export default function HeroSlider() {
             tagline: "SUSTAINABLE ARCHITECTURE FOR SCHOOLS",
             buttonText: "LEARN MORE",
             link: "/schools",
-            imageLeft: "/backgroundcv.jpg",
-            imageRight: "/backgroundcv.jpg",
+            imageLeft: "/school31.png",
+            imageRight: "/school2.jpg",
         }
     ];
 
