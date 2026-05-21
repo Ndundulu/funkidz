@@ -1,20 +1,24 @@
 "use client";
-import { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
-import { Menu, X, Search, User } from 'lucide-react';
-import Image from 'next/image';
+
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X, Search, User } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+
     const searchInputRef = useRef<HTMLInputElement>(null);
 
     const navLinks = [
-        { href: '/', label: 'Home' },
-        { href: '/shop', label: 'Shop' },
-        { href: '/trade-in', label: 'Trade-In' },
-        { href: '/schools', label: 'Schools' },
-        { href: '/contact', label: 'Contact' },
+        { href: "/shop", label: "SHOP ALL" },
+        { href: "/beds", label: "BEDS" },
+        { href: "/cribs", label: "CRIBS" },
+        { href: "/dressers-storage", label: "DRESSERS & STORAGE" },
+        { href: "/sale", label: "SALE" },
+        { href: "/trade-in", label: "TRADE-IN" },
+        { href: "/contact", label: "CONTACT" },
     ];
 
     useEffect(() => {
@@ -24,65 +28,89 @@ export default function Navbar() {
     }, [isSearchOpen]);
 
     return (
-        <header className="w-full bg-white sticky top-0 z-50 border-b border-gray-100">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between relative bg-white">
+        <header className="w-full bg-white sticky top-0 z-50 border-b border-[#efefef]">
 
-                {/* LEFT: Mobile Menu Button */}
+            {/* NAVBAR CONTAINER */}
+            <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-12 h-20 flex items-center justify-between relative bg-white">
+
+                {/* MOBILE MENU BUTTON */}
                 <div className="flex items-center lg:hidden">
                     <button
                         onClick={() => {
                             setIsOpen(!isOpen);
                             if (isSearchOpen) setIsSearchOpen(false);
                         }}
-                        className="p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800"
+                        className="p-2 hover:bg-gray-50 rounded-lg transition-all text-[#222]"
                     >
-                        {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
                 </div>
 
-                {/* CENTER: Logo - Centered on Mobile, Left on Desktop */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0">
+                {/* LOGO (Now standalone on the left) */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0 flex-shrink-0">
                     <Link href="/" className="flex items-center">
                         <Image
                             src="/funkidz.png"
                             alt="Funkidz Logo"
-                            width={130}
-                            height={38}
-                            className="h-9 w-auto object-contain"
+                            width={125}
+                            height={36}
+                            className="h-8 w-auto object-contain"
                             priority
                         />
                     </Link>
                 </div>
 
-                {/* RIGHT: Icons */}
-                <div className="flex items-center gap-2">
-                    {/* Search Button */}
+                {/* DESKTOP NAVIGATION (Centered perfectly relative to the entire header viewport) */}
+                <nav className="hidden lg:flex items-center gap-5 xl:gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className={`relative text-[11px] tracking-[0.14em] xl:tracking-[0.18em] font-medium whitespace-nowrap transition-all duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:transition-all hover:after:w-full ${
+                                link.label === "SALE"
+                                    ? "text-red-500 after:bg-red-500"
+                                    : "text-[#222] after:bg-[#222]"
+                            }`}
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                </nav>
+
+                {/* RIGHT SIDE ICONS */}
+                <div className="flex items-center gap-1 flex-shrink-0 z-10">
+
+                    {/* SEARCH BUTTON */}
                     <button
                         onClick={() => {
                             setIsSearchOpen(!isSearchOpen);
                             if (isOpen) setIsOpen(false);
                         }}
-                        className={`p-2 rounded-lg transition-all active:scale-95 ${
-                            isSearchOpen ? 'bg-gray-100 text-black' : 'hover:bg-gray-50 text-gray-800'
+                        className={`p-2 rounded-full transition-all duration-200 ${
+                            isSearchOpen ? "bg-gray-100 text-black" : "hover:bg-gray-50 text-[#222]"
                         }`}
                     >
-                        {isSearchOpen ? <X className="w-6 h-6 stroke-[1.75]" /> : <Search className="w-6 h-6 stroke-[1.75]" />}
+                        {isSearchOpen ? (
+                            <X className="w-5 h-5 stroke-[1.75]" />
+                        ) : (
+                            <Search className="w-5 h-5 stroke-[1.75]" />
+                        )}
                     </button>
 
-                    {/* Account Icon - Desktop only */}
+                    {/* ACCOUNT ICON */}
                     <Link
                         href="/account"
-                        className="hidden lg:block p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800"
+                        className="hidden lg:flex p-2 hover:bg-gray-50 rounded-full transition-all text-[#222]"
                     >
-                        <User className="w-6 h-6" />
+                        <User className="w-5 h-5 stroke-[1.75]" />
                     </Link>
 
-                    {/* Cart Icon */}
-                    <button className="p-2 hover:bg-gray-50 rounded-lg transition-all text-gray-800 active:scale-95 relative flex items-center justify-center">
+                    {/* CART ICON */}
+                    <button className="p-2 hover:bg-gray-50 rounded-full transition-all text-[#222] relative flex items-center justify-center">
                         <svg
                             viewBox="0 0 100 100"
-                            className="w-8 h-8 fill-none stroke-current"
-                            strokeWidth="3.5"
+                            className="w-7 h-7 fill-none stroke-current"
+                            strokeWidth="3"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                         >
@@ -100,44 +128,31 @@ export default function Navbar() {
                             <path d="M37 54 L83 54" />
                             <ellipse cx="60" cy="17" rx="4" ry="8" className="fill-none" strokeWidth="3" />
                         </svg>
-                        <span className="absolute top-1 right-1 bg-black text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+
+                        {/* CART COUNT */}
+                        <span className="absolute top-1 right-1 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-semibold">
                             3
                         </span>
                     </button>
-
-                    {/* Desktop Navigation is handled separately below */}
                 </div>
-
-                {/* DESKTOP NAVIGATION - Center on large screens */}
-                <nav className="hidden lg:flex items-center gap-8 text-base font-medium text-gray-800 absolute left-1/2 -translate-x-1/2">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className="hover:text-black transition-colors"
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
-                </nav>
             </div>
 
-            {/* EXPANDABLE SEARCH BAR - Original Style */}
+            {/* SEARCH BAR */}
             <div
-                className={`w-full bg-white border-t border-b border-gray-200 absolute left-0 transition-all duration-300 ease-in-out origin-top z-10 ${
+                className={`w-full bg-white border-t border-b border-[#efefef] absolute left-0 transition-all duration-300 ease-in-out origin-top z-10 ${
                     isSearchOpen
-                        ? 'opacity-100 translate-y-0 visible pointer-events-auto'
-                        : 'opacity-0 -translate-y-4 invisible pointer-events-none'
+                        ? "opacity-100 translate-y-0 visible pointer-events-auto"
+                        : "opacity-0 -translate-y-4 invisible pointer-events-none"
                 }`}
             >
                 <div className="max-w-3xl mx-auto px-4 py-3">
                     <form onSubmit={(e) => e.preventDefault()} className="relative flex items-center">
-                        <Search className="absolute left-2 w-6 h-6 text-black stroke-[2]" />
+                        <Search className="absolute left-2 w-5 h-5 text-black stroke-[1.75]" />
                         <input
                             ref={searchInputRef}
                             type="text"
                             placeholder="Search for..."
-                            className="w-full bg-transparent pl-11 pr-4 py-3 text-black font-medium text-lg placeholder-gray-500 focus:outline-none transition-all"
+                            className="w-full bg-transparent pl-10 pr-4 py-3 text-[#222] font-medium text-base placeholder-gray-400 focus:outline-none transition-all"
                         />
                     </form>
                 </div>
@@ -145,26 +160,29 @@ export default function Navbar() {
 
             {/* MOBILE MENU */}
             {isOpen && (
-                <div className="lg:hidden border-t border-gray-100 bg-white shadow-xl absolute left-0 w-full z-10">
-                    <nav className="flex flex-col py-4 px-6 space-y-3">
+                <div className="lg:hidden border-t border-[#efefef] bg-white shadow-xl absolute left-0 w-full z-10">
+                    <nav className="flex flex-col py-5 px-6 space-y-1">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className="font-medium text-lg py-2.5 text-gray-700 hover:text-black hover:translate-x-1 transition-all block"
+                                className={`text-[14px] tracking-[0.12em] font-medium py-3 transition-all ${
+                                    link.label === "SALE" ? "text-red-500" : "text-[#222]"
+                                }`}
                                 onClick={() => setIsOpen(false)}
                             >
                                 {link.label}
                             </Link>
                         ))}
 
+                        {/* ACCOUNT */}
                         <Link
                             href="/account"
-                            className="flex items-center gap-3 pt-4 mt-4 border-t border-gray-200 text-gray-700 hover:text-black"
+                            className="flex items-center gap-3 pt-5 mt-4 border-t border-[#efefef] text-[#222]"
                             onClick={() => setIsOpen(false)}
                         >
-                            <User className="w-5 h-5" />
-                            <span className="font-medium text-lg">Account</span>
+                            <User className="w-5 h-5 stroke-[1.75]" />
+                            <span className="text-[14px] tracking-[0.12em] font-medium">ACCOUNT</span>
                         </Link>
                     </nav>
                 </div>

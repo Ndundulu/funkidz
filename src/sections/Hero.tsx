@@ -44,8 +44,8 @@ export default function HeroSlider() {
             tagline: "SUSTAINABLE ARCHITECTURE FOR SCHOOLS",
             buttonText: "LEARN MORE",
             link: "/schools",
-            imageLeft: "/school31.png",
-            imageRight: "/school2.jpg",
+            imageLeft: "/school2.jpg",
+            imageRight: "/school31.png",
         }
     ];
 
@@ -77,7 +77,8 @@ export default function HeroSlider() {
     };
 
     return (
-        <section className="relative w-full h-[75vh] min-h-[500px] max-h-[750px] bg-white overflow-visible pb-12">
+        /* FIXED: Removed pb-12 here so there is no extra white gap at the bottom */
+        <section className="relative w-full h-[75vh] min-h-[500px] max-h-[750px] bg-white overflow-visible">
             {/* Progress Circle Animation */}
             <style jsx global>{`
                 @keyframes progress-fill {
@@ -104,11 +105,12 @@ export default function HeroSlider() {
                             alt={`${slides[currentSlide].title} left view`}
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"
+                            /* RESTORED: object-cover back to how you like it */
                             className="object-cover object-center transition-transform duration-1000 ease-out"
                             priority
                         />
 
-                        {/* Top-aligned wrapper stops the text card from blocking your layout imagery */}
+                        {/* Text Overlay Box */}
                         <div className="absolute inset-0 flex items-start justify-center md:justify-start pt-10 px-6 sm:px-12 z-10">
                             <div className={`bg-white/95 backdrop-blur-sm px-8 py-10 sm:px-12 sm:py-14 text-center max-w-sm shadow-md border border-gray-100/20 transform transition-all duration-1000 cubic-bezier(0.25, 1, 0.5, 1) ${
                                 isTransitioning ? 'translate-y-[100%] opacity-0' : 'translate-y-0 opacity-100'
@@ -136,12 +138,13 @@ export default function HeroSlider() {
                             alt={`${slides[currentSlide].title} right view`}
                             fill
                             sizes="50vw"
+                            /* RESTORED: object-cover back to how you like it */
                             className="object-cover object-center"
                         />
                     </div>
                 </div>
 
-                {/* LOADER DOTS WITH BALANCED BASE OVERLAYS */}
+                {/* LOADER DOTS */}
                 <div className="absolute bottom-6 right-8 sm:right-12 z-30 flex items-center gap-4 select-none">
                     {slides.map((_, index) => {
                         const isActive = index === currentSlide;
@@ -154,14 +157,8 @@ export default function HeroSlider() {
                             >
                                 {isActive ? (
                                     <div className="relative w-4 h-4 flex items-center justify-center">
-                                        {/* Underlying standard gray solid dot footprint */}
                                         <div className="absolute w-2 h-2 rounded-full bg-gray-400" />
-
-                                        {/* Active SVG Ring wrapper scaled dynamically around the dot */}
-                                        <svg
-                                            className="absolute w-4 h-4 -rotate-90 z-10"
-                                            viewBox="0 0 16 16"
-                                        >
+                                        <svg className="absolute w-4 h-4 -rotate-90 z-10" viewBox="0 0 16 16">
                                             <circle
                                                 cx="8"
                                                 cy="8"
@@ -185,7 +182,7 @@ export default function HeroSlider() {
                 </div>
             </div>
 
-            {/* Scroll Arrow */}
+            {/* Scroll Arrow Button */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-30 translate-y-1/2">
                 <button
                     onClick={() => window.scrollBy({ top: window.innerHeight * 0.7, behavior: 'smooth' })}
