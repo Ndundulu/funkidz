@@ -27,7 +27,7 @@ export default function HeroSlider() {
             buttonText: "SHOP NOW",
             link: "/shop/moss",
             imageLeft: "/backcover5.jpg",
-            imageRight: "/mirror.jpg",
+            imageRight: "/Storageunit.jpg",
         },
         {
             id: 2,
