@@ -26,7 +26,7 @@ const products = [
     },
     {
         id: 4,
-        title: "Perch Twin Bunk Bed",
+        title: "Loft Bed",
         price: "KSH 286,000",
         image: "/loftbed.jpeg",
         badges: ["FREE INSTALLATION", "BEST SELLER"],
@@ -45,12 +45,12 @@ export default function BestSellers() {
                     </h2>
                 </div>
 
-                {/* Mobile layout: Width reduced to 50vw for a perfect compact peek effect */}
-                <div className="flex overflow-x-auto pb-4 md:pb-0 md:grid md:grid-cols-4 gap-x-3 md:gap-x-5 gap-y-12 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {/* Mobile layout: Width optimized to 55vw with 3.5 horizontal gap */}
+                <div className="flex overflow-x-auto pb-4 md:pb-0 md:grid md:grid-cols-4 gap-x-3.5 md:gap-x-5 gap-y-12 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     {products.map((product) => (
                         <div
                             key={product.id}
-                            className="min-w-[50vw] sm:min-w-[35vw] md:min-w-0 flex flex-col bg-white snap-start"
+                            className="min-w-[55vw] sm:min-w-[35vw] md:min-w-0 flex flex-col bg-white snap-start"
                         >
                             {/* Proportional Downscaled Image Container */}
                             <div className="relative aspect-[3/4] w-full overflow-hidden bg-white border border-gray-100 mb-2 md:mb-4">
@@ -61,20 +61,27 @@ export default function BestSellers() {
                                     className="w-full h-full object-cover"
                                 />
 
-                                {/* Ultra-minimalist Badges proportionally smaller */}
-                                <div className="absolute top-2 left-2 md:top-4 md:left-4 flex flex-col gap-0.5 z-10">
-                                    {product.badges.map((badge, idx) => (
-                                        <span
-                                            key={idx}
-                                            className="text-[7px] md:text-[10px] tracking-wider px-1 py-0.5 uppercase bg-white text-gray-500 border border-gray-100/50 font-light"
-                                        >
-                                            {badge}
-                                        </span>
-                                    ))}
+                                {/* Premium Micro-Badges */}
+                                <div className="absolute top-2 left-2 md:top-4 md:left-4 flex flex-col gap-1 z-10">
+                                    {product.badges.map((badge, idx) => {
+                                        const isFreeInstall = badge === "FREE INSTALLATION";
+                                        return (
+                                            <span
+                                                key={idx}
+                                                className={`text-[8px] md:text-[9px] tracking-wider px-1.5 py-0.5 uppercase border font-medium shadow-sm transition-colors ${
+                                                    isFreeInstall
+                                                        ? "bg-[#3B5323] text-white border-[#3B5323]"
+                                                        : "bg-white text-gray-600 border-gray-100"
+                                                }`}
+                                            >
+                                                {badge}
+                                            </span>
+                                        );
+                                    })}
                                 </div>
 
                                 {/* Fine-lined Heart Icon */}
-                                <button className="absolute top-2 right-2 md:top-4 md:right-4 p-1 rounded-full bg-white/70 text-gray-700 z-10">
+                                <button className="absolute top-2 right-2 md:top-4 md:right-4 p-1 rounded-full bg-white/80 text-gray-700 z-10">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -97,13 +104,13 @@ export default function BestSellers() {
                                 <h3 className="text-[11px] md:text-base font-normal text-gray-800 mb-0.5 tracking-tight">
                                     {product.title}
                                 </h3>
-                                <p className="text-[10px] md:text-sm text-gray-400 font-light">{product.price}</p>
+                                <p className="text-[12px] md:text-sm text-gray-400 font-light">{product.price}</p>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Shop All Anchor adjusted for proportional distance */}
+                {/* Proportional Shop All Anchor */}
                 <div className="text-center mt-8 md:mt-20">
                     <a
                         href="#shop-all"
