@@ -39,21 +39,21 @@ export default function BestSellers() {
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
 
                 {/* Section Title */}
-                <div className="text-center mb-10 md:mb-14">
+                <div className="text-center mb-8 md:mb-14">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#1A1A1A] tracking-wide">
                         Sustainably made best-sellers
                     </h2>
                 </div>
 
-                {/* Mobile layout: Horizontal flex row. Desktop layout: 4-column grid */}
-                <div className="flex overflow-x-auto pb-6 md:pb-0 md:grid md:grid-cols-4 gap-x-5 gap-y-12 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {/* Mobile layout: Trimmed card width to 64vw to reduce image size and mimic the screenshot's peek effect */}
+                <div className="flex overflow-x-auto pb-6 md:pb-0 md:grid md:grid-cols-4 gap-x-4 md:gap-x-5 gap-y-12 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     {products.map((product) => (
                         <div
                             key={product.id}
-                            className="min-w-[78vw] sm:min-w-[45vw] md:min-w-0 flex flex-col bg-white snap-start"
+                            className="min-w-[64vw] sm:min-w-[45vw] md:min-w-0 flex flex-col bg-white snap-start"
                         >
-                            {/* Image Container */}
-                            <div className="relative aspect-[3/4] w-full overflow-hidden bg-white border border-gray-100 mb-4">
+                            {/* Downscaled Image Container */}
+                            <div className="relative aspect-[3/4] w-full overflow-hidden bg-white border border-gray-100 mb-3 md:mb-4">
                                 <img
                                     src={product.image}
                                     alt={product.title}
@@ -61,27 +61,27 @@ export default function BestSellers() {
                                     className="w-full h-full object-cover"
                                 />
 
-                                {/* Badges (Top Left) */}
-                                <div className="absolute top-3 left-3 md:top-4 md:left-4 flex flex-col gap-1 z-10">
+                                {/* Ultra-minimalist Badges matching the mobile screenshot */}
+                                <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 flex flex-col gap-1 z-10">
                                     {product.badges.map((badge, idx) => (
                                         <span
                                             key={idx}
-                                            className="text-[9px] md:text-[10px] font-bold tracking-wider px-2 py-0.5 md:px-2.5 md:py-1 uppercase bg-white text-gray-700 border border-gray-100 shadow-sm"
+                                            className="text-[8px] md:text-[10px] tracking-wider px-1.5 py-0.5 uppercase bg-white text-gray-500 border border-gray-100/60 font-light"
                                         >
                                             {badge}
                                         </span>
                                     ))}
                                 </div>
 
-                                {/* Heart Icon (Top Right) */}
-                                <button className="absolute top-3 right-3 md:top-4 md:right-4 p-2 rounded-full bg-white/80 hover:bg-white text-gray-700 hover:text-black z-10 transition-colors shadow-sm">
+                                {/* Light Heart Icon */}
+                                <button className="absolute top-2.5 right-2.5 md:top-4 md:right-4 p-1.5 rounded-full bg-white/80 text-gray-700 z-10">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
-                                        strokeWidth={1.2}
+                                        strokeWidth={1}
                                         stroke="currentColor"
-                                        className="w-5 h-5"
+                                        className="w-4 h-4 md:w-5 md:h-5"
                                     >
                                         <path
                                             strokeLinecap="round"
@@ -92,22 +92,22 @@ export default function BestSellers() {
                                 </button>
                             </div>
 
-                            {/* Product Metadata */}
-                            <div className="text-center flex flex-col items-center flex-grow">
-                                <h3 className="text-sm md:text-base font-medium text-gray-900 mb-1 tracking-tight">
+                            {/* Downscaled Metadata block */}
+                            <div className="text-center flex flex-col items-center max-w-[90%] mx-auto">
+                                <h3 className="text-xs md:text-base font-normal text-gray-800 mb-0.5 tracking-tight">
                                     {product.title}
                                 </h3>
-                                <p className="text-sm text-gray-500 font-normal">{product.price}</p>
+                                <p className="text-xs md:text-sm text-gray-500 font-light">{product.price}</p>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Shop All Button */}
-                <div className="text-center mt-16 md:mt-20">
+                {/* Perfectly aligned Shop All Anchor */}
+                <div className="text-center mt-10 md:mt-20">
                     <a
                         href="#shop-all"
-                        className="inline-block text-sm font-medium uppercase tracking-widest text-black border-b border-black pb-1 hover:text-gray-600 hover:border-gray-600 transition-colors"
+                        className="inline-block text-xs md:text-sm font-medium uppercase tracking-widest text-black border-b border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors"
                     >
                         Shop All
                     </a>
