@@ -35,25 +35,25 @@ const products = [
 
 export default function BestSellers() {
     return (
-        <section className="w-full bg-white py-12 md:py-16 font-sans overflow-hidden">
+        <section className="w-full bg-white py-10 md:py-16 font-sans overflow-hidden">
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
 
-                {/* Section Title */}
-                <div className="text-center mb-8 md:mb-14">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#1A1A1A] tracking-wide">
+                {/* Downscaled Section Title for Mobile */}
+                <div className="text-center mb-6 md:mb-14">
+                    <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-serif text-[#1A1A1A] tracking-wide">
                         Sustainably made best-sellers
                     </h2>
                 </div>
 
-                {/* Mobile layout: Trimmed card width to 64vw to reduce image size and mimic the screenshot's peek effect */}
-                <div className="flex overflow-x-auto pb-6 md:pb-0 md:grid md:grid-cols-4 gap-x-4 md:gap-x-5 gap-y-12 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {/* Mobile layout: Width reduced to 50vw for a perfect compact peek effect */}
+                <div className="flex overflow-x-auto pb-4 md:pb-0 md:grid md:grid-cols-4 gap-x-3 md:gap-x-5 gap-y-12 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     {products.map((product) => (
                         <div
                             key={product.id}
-                            className="min-w-[64vw] sm:min-w-[45vw] md:min-w-0 flex flex-col bg-white snap-start"
+                            className="min-w-[50vw] sm:min-w-[35vw] md:min-w-0 flex flex-col bg-white snap-start"
                         >
-                            {/* Downscaled Image Container */}
-                            <div className="relative aspect-[3/4] w-full overflow-hidden bg-white border border-gray-100 mb-3 md:mb-4">
+                            {/* Proportional Downscaled Image Container */}
+                            <div className="relative aspect-[3/4] w-full overflow-hidden bg-white border border-gray-100 mb-2 md:mb-4">
                                 <img
                                     src={product.image}
                                     alt={product.title}
@@ -61,27 +61,27 @@ export default function BestSellers() {
                                     className="w-full h-full object-cover"
                                 />
 
-                                {/* Ultra-minimalist Badges matching the mobile screenshot */}
-                                <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 flex flex-col gap-1 z-10">
+                                {/* Ultra-minimalist Badges proportionally smaller */}
+                                <div className="absolute top-2 left-2 md:top-4 md:left-4 flex flex-col gap-0.5 z-10">
                                     {product.badges.map((badge, idx) => (
                                         <span
                                             key={idx}
-                                            className="text-[8px] md:text-[10px] tracking-wider px-1.5 py-0.5 uppercase bg-white text-gray-500 border border-gray-100/60 font-light"
+                                            className="text-[7px] md:text-[10px] tracking-wider px-1 py-0.5 uppercase bg-white text-gray-500 border border-gray-100/50 font-light"
                                         >
                                             {badge}
                                         </span>
                                     ))}
                                 </div>
 
-                                {/* Light Heart Icon */}
-                                <button className="absolute top-2.5 right-2.5 md:top-4 md:right-4 p-1.5 rounded-full bg-white/80 text-gray-700 z-10">
+                                {/* Fine-lined Heart Icon */}
+                                <button className="absolute top-2 right-2 md:top-4 md:right-4 p-1 rounded-full bg-white/70 text-gray-700 z-10">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
-                                        strokeWidth={1}
+                                        strokeWidth={0.8}
                                         stroke="currentColor"
-                                        className="w-4 h-4 md:w-5 md:h-5"
+                                        className="w-3.5 h-3.5 md:w-5 md:h-5"
                                     >
                                         <path
                                             strokeLinecap="round"
@@ -92,22 +92,22 @@ export default function BestSellers() {
                                 </button>
                             </div>
 
-                            {/* Downscaled Metadata block */}
-                            <div className="text-center flex flex-col items-center max-w-[90%] mx-auto">
-                                <h3 className="text-xs md:text-base font-normal text-gray-800 mb-0.5 tracking-tight">
+                            {/* Proportionally Smaller Metadata */}
+                            <div className="text-center flex flex-col items-center max-w-[95%] mx-auto">
+                                <h3 className="text-[11px] md:text-base font-normal text-gray-800 mb-0.5 tracking-tight">
                                     {product.title}
                                 </h3>
-                                <p className="text-xs md:text-sm text-gray-500 font-light">{product.price}</p>
+                                <p className="text-[10px] md:text-sm text-gray-400 font-light">{product.price}</p>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Perfectly aligned Shop All Anchor */}
-                <div className="text-center mt-10 md:mt-20">
+                {/* Shop All Anchor adjusted for proportional distance */}
+                <div className="text-center mt-8 md:mt-20">
                     <a
                         href="#shop-all"
-                        className="inline-block text-xs md:text-sm font-medium uppercase tracking-widest text-black border-b border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors"
+                        className="inline-block text-[10px] md:text-sm font-medium uppercase tracking-widest text-black border-b border-black pb-0.5 hover:text-gray-500 hover:border-gray-500 transition-colors"
                     >
                         Shop All
                     </a>
