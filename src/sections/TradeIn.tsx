@@ -1,50 +1,54 @@
-const steps = [
-    "Buy Funkidz furniture",
-    "Child outgrows furniture",
-    "Request assessment",
-    "Receive trade-in value",
-]
+"use client";
 
-export default function TradeIn() {
+import React from "react";
+
+export default function TradeInSection() {
     return (
-        <section className="bg-black text-white py-24 px-6">
-            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
+        <section className="w-full bg-[#F5F2EB] font-sans">
+            {/* Grid Container: Stacked on mobile, side-by-side on md screens and up */}
+            <div className="grid grid-cols-1 md:grid-cols-2 items-center w-full max-w-[1440px] mx-auto">
 
-                <div>
-                    <p className="uppercase tracking-[0.2em] text-sm text-orange-400 mb-4">
+                {/* Image Container - Swapped to object-contain so nothing gets cut off */}
+                <div className="w-full h-full flex items-center justify-center overflow-hidden bg-[#F5F2EB]">
+                    <img
+                        src="/Trade-in.png"
+                        alt="Furniture Trade-In Program"
+                        className="w-full h-auto max-h-[500px] md:max-h-full object-contain"
+                        loading="lazy"
+                    />
+                </div>
+
+                {/* Content Container */}
+                <div className="text-center md:text-left px-6 py-12 sm:py-16 md:px-16 lg:px-24">
+
+                    {/* Uppercase Small Label */}
+                    <p className="text-[10px] md:text-xs font-medium uppercase tracking-[0.2em] text-gray-800 mb-4">
                         Trade-In Program
                     </p>
 
-                    <h2 className="text-5xl font-bold leading-tight mb-6">
-                        Furniture That Grows With Your Child
+                    {/* Main Headline */}
+                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-[#1A1A1A] leading-snug tracking-wide mb-5">
+                        Out with the old, in with the growth. Give your furniture a second story.
                     </h2>
 
-                    <p className="text-gray-300 text-lg mb-8">
-                        Upgrade your child's furniture as they grow and receive
-                        trade-in value toward the next stage.
+                    {/* Subtext Description */}
+                    <p className="text-xs sm:text-sm md:text-base text-gray-700 font-light leading-relaxed mb-8 max-w-xl mx-auto md:mx-0">
+                        As your children grow, your space transitions too. Trade in your gently used setups for store credit towards their next milestone stage.
                     </p>
 
-                    <button className="bg-orange-600 px-6 py-3 rounded-full">
-                        Start Trade-In
-                    </button>
-                </div>
-
-                <div className="space-y-4">
-                    {steps.map((step, index) => (
-                        <div
-                            key={index}
-                            className="bg-zinc-900 rounded-2xl p-6 flex items-center gap-4"
+                    {/* Solid CTA Button */}
+                    <div>
+                        <a
+                            href="#trade-in"
+                            className="inline-block bg-[#1A1A1A] text-white text-xs md:text-sm font-medium uppercase tracking-widest px-8 py-3.5 hover:bg-gray-800 transition-colors duration-300"
                         >
-                            <div className="h-10 w-10 rounded-full bg-orange-600 flex items-center justify-center font-bold">
-                                {index + 1}
-                            </div>
+                            Learn More
+                        </a>
+                    </div>
 
-                            <p>{step}</p>
-                        </div>
-                    ))}
                 </div>
 
             </div>
         </section>
-    )
+    );
 }
