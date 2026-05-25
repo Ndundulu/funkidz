@@ -8,7 +8,7 @@ export default function TradeInSection() {
             {/* Grid Container: Stacked on mobile, side-by-side on md screens and up */}
             <div className="grid grid-cols-1 md:grid-cols-2 items-center w-full max-w-[1440px] mx-auto">
 
-                {/* Image Container - Swapped to object-contain so nothing gets cut off */}
+                {/* Image Container */}
                 <div className="w-full h-full flex items-center justify-center overflow-hidden bg-[#F5F2EB]">
                     <img
                         src="/Trade-in.png"
@@ -36,13 +36,13 @@ export default function TradeInSection() {
                         As your children grow, your space transitions too. Trade in your gently used setups for store credit towards their next milestone stage.
                     </p>
 
-                    {/* Solid CTA Button */}
+                    {/* Updated CTA Button */}
                     <div>
                         <a
                             href="#trade-in"
                             className="inline-block bg-[#1A1A1A] text-white text-xs md:text-sm font-medium uppercase tracking-widest px-8 py-3.5 hover:bg-gray-800 transition-colors duration-300"
                         >
-                            Learn More
+                            Trade-In Now
                         </a>
                     </div>
 
