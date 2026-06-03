@@ -98,7 +98,7 @@ export function TradeInProvider({ children }: { children: ReactNode }) {
                                         <h2 className="text-2xl md:text-3xl font-serif text-[#1A1A1A] mt-2">Calculate Your Trade-In Value</h2>
                                     </div>
 
-                                    <div className="grid md:grid-cols-2 gap-10">
+                                    <div className="grid md:grid-cols-2 gap-5">
                                         {/* LEFT SIDE */}
                                         <div className="space-y-8">
                                             <div>

@@ -2,14 +2,14 @@
 
 import React from "react";
 import { useTradeIn } from "@/context/TradeInContext";   // ← Add this import
-import TradeInPortal from "@/components/TradeInPortal";
+
 
 export default function TradeInSection() {
     const { openTradeIn } = useTradeIn();   // ← Add this line
 
     return (
         <>
-            <section className="w-full bg-[#F5F2EB] font-sans">
+            <section id="trade-in" className="w-full bg-[#F5F2EB] font-sans">
                 <div className="grid grid-cols-1 md:grid-cols-2 items-center w-full max-w-[1440px] mx-auto">
 
                     {/* Image Container */}

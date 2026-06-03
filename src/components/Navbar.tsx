@@ -17,9 +17,28 @@ export default function Navbar() {
         { href: "/cribs", label: "CRIBS" },
         { href: "/dressers-storage", label: "DRESSERS & STORAGE" },
         { href: "/sale", label: "SALE" },
-        { href: "/trade-in", label: "TRADE-IN" },
+        { href: "#trade-in", label: "TRADE-IN" },
         { href: "/contact", label: "CONTACT" },
     ];
+
+    // Custom smooth scroll function
+    const scrollToSection = (href: string) => {
+        if (href.startsWith("#")) {
+            const id = href.replace("#", "");
+            const element = document.getElementById(id);
+
+            if (element) {
+                const navbarHeight = 80; // Adjust if your navbar height changes
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.scrollY - navbarHeight;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth",
+                });
+            }
+        }
+    };
 
     useEffect(() => {
         if (isSearchOpen && searchInputRef.current) {
@@ -46,7 +65,7 @@ export default function Navbar() {
                     </button>
                 </div>
 
-                {/* LOGO (Now standalone on the left) */}
+                {/* LOGO */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0 flex-shrink-0">
                     <Link href="/" className="flex items-center">
                         <Image
@@ -60,12 +79,19 @@ export default function Navbar() {
                     </Link>
                 </div>
 
-                {/* DESKTOP NAVIGATION (Centered perfectly relative to the entire header viewport) */}
+                {/* DESKTOP NAVIGATION */}
                 <nav className="hidden lg:flex items-center gap-5 xl:gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
+                            scroll={false}                    // ← Important: disabled default scroll
+                            onClick={(e) => {
+                                if (link.href.startsWith("#")) {
+                                    e.preventDefault();
+                                    scrollToSection(link.href);
+                                }
+                            }}
                             className={`relative text-[11px] tracking-[0.14em] xl:tracking-[0.18em] font-medium whitespace-nowrap transition-all duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:transition-all hover:after:w-full ${
                                 link.label === "SALE"
                                     ? "text-red-500 after:bg-red-500"
@@ -129,7 +155,6 @@ export default function Navbar() {
                             <ellipse cx="60" cy="17" rx="4" ry="8" className="fill-none" strokeWidth="3" />
                         </svg>
 
-                        {/* CART COUNT */}
                         <span className="absolute top-1 right-1 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-semibold">
                             3
                         </span>
@@ -166,10 +191,19 @@ export default function Navbar() {
                             <Link
                                 key={link.href}
                                 href={link.href}
+                                scroll={false}                    // ← Disabled default
+                                onClick={(e) => {
+                                    if (link.href.startsWith("#")) {
+                                        e.preventDefault();
+                                        scrollToSection(link.href);
+                                        setIsOpen(false);
+                                    } else {
+                                        setIsOpen(false);
+                                    }
+                                }}
                                 className={`text-[14px] tracking-[0.12em] font-medium py-3 transition-all ${
                                     link.label === "SALE" ? "text-red-500" : "text-[#222]"
                                 }`}
-                                onClick={() => setIsOpen(false)}
                             >
                                 {link.label}
                             </Link>
