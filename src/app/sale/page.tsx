@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Image from "next/image";
-import { Grid, LayoutGrid, List, Heart, Plus, ChevronDown, SlidersHorizontal } from "lucide-react";
+import { Grid, LayoutGrid, List, ChevronDown, SlidersHorizontal, X } from "lucide-react";
+import ProductCard from "@/components/ProductCard";
 
 const INITIAL_PRODUCTS = [
     {
@@ -10,7 +10,6 @@ const INITIAL_PRODUCTS = [
         name: "Junior bed",
         price: 28,
         originalPrice: 36,
-        discount: "SAVE 22%",
         image: "/Junior bed.jpg",
         category: "Decor",
     },
@@ -19,7 +18,6 @@ const INITIAL_PRODUCTS = [
         name: "Double decker with pullout bed",
         price: 11,
         originalPrice: 15,
-        discount: "SAVE 27%",
         image: "/Double decker with pull out bed.jpg",
         category: "Books",
     },
@@ -28,7 +26,6 @@ const INITIAL_PRODUCTS = [
         name: "Change unit with a basin",
         price: 10,
         originalPrice: 14,
-        discount: "SAVE 29%",
         image: "/Changeunit Storage with basin.jpeg",
         category: "Toys",
     },
@@ -37,7 +34,6 @@ const INITIAL_PRODUCTS = [
         name: "Baby cot",
         price: 120,
         originalPrice: 140,
-        discount: "SAVE 14%",
         image: "/Baby cot Crib.jpg",
         category: "Decor",
     },
@@ -51,7 +47,6 @@ export default function SalePage() {
     const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
     const [isSortDropdownOpen, setIsSortDropdownOpen] = useState<boolean>(false);
 
-    // Dynamic Filtering Logic
     const filteredProducts = useMemo(() => {
         return INITIAL_PRODUCTS.filter((product) => {
             const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
@@ -60,15 +55,10 @@ export default function SalePage() {
         }).sort((a, b) => {
             if (sortBy === "price-low") return a.price - b.price;
             if (sortBy === "price-high") return b.price - a.price;
-            if (sortBy === "discount") {
-                const getDiscountNum = (str: string) => parseInt(str.replace(/[^0-9]/g, ""), 10) || 0;
-                return getDiscountNum(b.discount) - getDiscountNum(a.discount);
-            }
             return a.id - b.id;
         });
     }, [selectedCategory, priceRange, sortBy]);
 
-    // Dynamic dynamic counts based on items on sale
     const categoryCounts = useMemo(() => {
         const counts: Record<string, number> = {};
         INITIAL_PRODUCTS.forEach((p) => {
@@ -77,32 +67,28 @@ export default function SalePage() {
         return counts;
     }, []);
 
+    const resetFilters = () => {
+        setSelectedCategory(null);
+        setPriceRange(150);
+    };
+
     return (
         <main className="min-h-screen bg-white text-[#222]">
             {/* PAGE TITLE */}
-            <div className="w-full text-center py-5 md:py-5 border-b border-[#E8E8E8]">
+            <div className="w-full text-center py-5 md:py-8 border-b border-[#E8E8E8]">
                 <h1 className="text-3xl md:text-4xl font-serif tracking-wide text-neutral-800">Sale</h1>
             </div>
 
-            {/* --- DESKTOP FILTER BAR --- */}
+            {/* DESKTOP FILTER BAR */}
             <div className="hidden lg:flex max-w-full mx-auto px-4 sm:px-6 lg:px-12 h-14 border-b border-[#E8E8E8] items-center justify-between text-xs tracking-wider text-neutral-500">
                 <div className="flex items-center gap-4">
-                    <button
-                        onClick={() => setViewLayout("grid-3")}
-                        className={`p-1 transition-colors ${viewLayout === "grid-3" ? "text-black" : "text-gray-300"}`}
-                    >
+                    <button onClick={() => setViewLayout("grid-3")} className={`p-1 transition-colors ${viewLayout === "grid-3" ? "text-black" : "text-gray-300"}`}>
                         <Grid className="w-4 h-4 stroke-[1.5]" />
                     </button>
-                    <button
-                        onClick={() => setViewLayout("grid-4")}
-                        className={`p-1 transition-colors ${viewLayout === "grid-4" ? "text-black" : "text-gray-300"}`}
-                    >
+                    <button onClick={() => setViewLayout("grid-4")} className={`p-1 transition-colors ${viewLayout === "grid-4" ? "text-black" : "text-gray-300"}`}>
                         <LayoutGrid className="w-4 h-4 stroke-[1.5]" />
                     </button>
-                    <button
-                        onClick={() => setViewLayout("list")}
-                        className={`p-1 transition-colors ${viewLayout === "list" ? "text-black" : "text-gray-300"}`}
-                    >
+                    <button onClick={() => setViewLayout("list")} className={`p-1 transition-colors ${viewLayout === "list" ? "text-black" : "text-gray-300"}`}>
                         <List className="w-4 h-4 stroke-[1.5]" />
                     </button>
                 </div>
@@ -112,11 +98,8 @@ export default function SalePage() {
                 </div>
 
                 <div className="relative">
-                    <button
-                        onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-                        className="flex items-center gap-1 cursor-pointer hover:text-black transition-colors"
-                    >
-                        <span>Sort by ({sortBy === "featured" ? "Featured" : sortBy === "price-low" ? "Price low-high" : sortBy === "price-high" ? "Price high-low" : "Savings"})</span>
+                    <button onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)} className="flex items-center gap-1 cursor-pointer hover:text-black transition-colors">
+                        <span>Sort by ({sortBy === "featured" ? "Featured" : sortBy === "price-low" ? "Price low-high" : "Price high-low"})</span>
                         <ChevronDown className="w-3 h-3" />
                     </button>
                     {isSortDropdownOpen && (
@@ -125,14 +108,10 @@ export default function SalePage() {
                                 { value: "featured", label: "Featured" },
                                 { value: "price-low", label: "Price: Low to High" },
                                 { value: "price-high", label: "Price: High to Low" },
-                                { value: "discount", label: "Biggest Saving" },
                             ].map((option) => (
                                 <button
                                     key={option.value}
-                                    onClick={() => {
-                                        setSortBy(option.value);
-                                        setIsSortDropdownOpen(false);
-                                    }}
+                                    onClick={() => { setSortBy(option.value); setIsSortDropdownOpen(false); }}
                                     className="w-full text-left px-4 py-2 hover:bg-neutral-50 text-neutral-700 block"
                                 >
                                     {option.label}
@@ -143,10 +122,10 @@ export default function SalePage() {
                 </div>
             </div>
 
-            {/* --- MOBILE CONTROL BAR --- */}
+            {/* MOBILE CONTROL BAR */}
             <div className="lg:hidden w-full border-b border-[#efefef] grid grid-cols-3 h-12 text-xs tracking-wider text-neutral-600 font-medium bg-white">
                 <button
-                    onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
+                    onClick={() => setIsMobileFilterOpen(true)}
                     className="flex items-center justify-center gap-1.5 border-r border-[#efefef]"
                 >
                     <SlidersHorizontal className="w-3.5 h-3.5 text-neutral-400" />
@@ -154,22 +133,16 @@ export default function SalePage() {
                 </button>
 
                 <div className="relative flex items-center justify-center border-r border-[#efefef]">
-                    <button
-                        onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-                        className="flex items-center gap-1 w-full h-full justify-center"
-                    >
+                    <button onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)} className="flex items-center gap-1 w-full h-full justify-center">
                         <span>Sort by</span>
                         <ChevronDown className="w-3 h-3 text-neutral-400" />
                     </button>
                     {isSortDropdownOpen && (
                         <div className="absolute top-full left-0 w-full min-w-[160px] bg-white border-b border-[#E5E5E5] shadow-lg z-50 py-1">
-                            {["featured", "price-low", "price-high", "discount"].map((option) => (
+                            {["featured", "price-low", "price-high"].map((option) => (
                                 <button
                                     key={option}
-                                    onClick={() => {
-                                        setSortBy(option);
-                                        setIsSortDropdownOpen(false);
-                                    }}
+                                    onClick={() => { setSortBy(option); setIsSortDropdownOpen(false); }}
                                     className="w-full text-left px-4 py-2.5 text-xs capitalize hover:bg-neutral-50"
                                 >
                                     {option.replace("-", " ")}
@@ -189,22 +162,17 @@ export default function SalePage() {
                 </div>
             </div>
 
-            {/* WORKSPACE AREA */}
+            {/* MAIN CONTENT */}
             <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-12 py-10 flex flex-col lg:flex-row gap-12">
-
-                {/* SIDEBAR FILTERS */}
-                <aside className={`w-full lg:w-60 flex-shrink-0 space-y-8 ${isMobileFilterOpen ? "block" : "hidden lg:block"}`}>
+                {/* DESKTOP SIDEBAR */}
+                <aside className="hidden lg:block w-60 flex-shrink-0 space-y-8">
                     <div className="border-b border-[#efefef] pb-6">
-                        <div className="flex items-center justify-between text-[13px] font-medium tracking-widest mb-4">
+                        <div className="flex items-center justify-between text-[13px] font-medium tracking-widest mb-4 uppercase">
                             <span>Product type</span>
-                            <ChevronDown className="w-4 h-4 text-neutral-400 lg:hidden" />
                         </div>
                         <ul className="space-y-2.5 text-[13px] text-neutral-600">
                             <li>
-                                <button
-                                    onClick={() => setSelectedCategory(null)}
-                                    className={`hover:text-black transition-colors ${!selectedCategory ? "text-black font-semibold" : ""}`}
-                                >
+                                <button onClick={() => setSelectedCategory(null)} className={`hover:text-black transition-colors ${!selectedCategory ? "text-black font-semibold" : ""}`}>
                                     All Items
                                 </button>
                             </li>
@@ -212,9 +180,7 @@ export default function SalePage() {
                                 <li key={name}>
                                     <button
                                         onClick={() => setSelectedCategory(selectedCategory === name ? null : name)}
-                                        className={`hover:text-black transition-colors flex items-center gap-1 ${
-                                            selectedCategory === name ? "text-black font-semibold" : ""
-                                        }`}
+                                        className={`hover:text-black transition-colors flex items-center gap-1 ${selectedCategory === name ? "text-black font-semibold" : ""}`}
                                     >
                                         {name} <span className="text-neutral-400 text-xs">({count})</span>
                                     </button>
@@ -224,8 +190,8 @@ export default function SalePage() {
                     </div>
 
                     <div>
-                        <div className="flex items-center justify-between text-[13px] font-medium tracking-widest mb-4">
-                            <span>Price</span>
+                        <div className="flex items-center justify-between text-[13px] font-medium tracking-widest mb-4 uppercase">
+                            <span>Price Range</span>
                         </div>
                         <div className="px-1">
                             <input
@@ -237,23 +203,19 @@ export default function SalePage() {
                                 className="w-full h-[2px] bg-neutral-200 appearance-none cursor-pointer accent-black"
                             />
                             <div className="flex items-center justify-between mt-4 text-xs text-neutral-500">
-                                <div className="flex items-center gap-1 border border-neutral-200 px-3 py-2 w-20">
-                                    <span className="text-neutral-400">KSH</span>
-                                    <input type="number" value="0" readOnly className="w-full bg-transparent outline-none pointer-events-none" />
-                                </div>
+                                <div className="border border-neutral-200 px-3 py-2 w-20">KSH 0</div>
                                 <span className="text-neutral-400 font-serif italic">to</span>
-                                <div className="flex items-center gap-1 border border-neutral-200 px-3 py-2 w-24">
-                                    <span className="text-neutral-400">KSH</span>
-                                    <input
-                                        type="number"
-                                        value={priceRange}
-                                        onChange={(e) => setPriceRange(Number(e.target.value))}
-                                        className="w-full bg-transparent outline-none"
-                                    />
-                                </div>
+                                <div className="border border-neutral-800 px-3 py-2 w-24 text-black font-medium">KSH {priceRange}</div>
                             </div>
                         </div>
                     </div>
+
+                    <button
+                        onClick={resetFilters}
+                        className="text-xs text-neutral-500 hover:text-black underline"
+                    >
+                        Reset Filters
+                    </button>
                 </aside>
 
                 {/* PRODUCTS GRID */}
@@ -266,65 +228,102 @@ export default function SalePage() {
                         viewLayout === "grid-3" && "lg:grid-cols-3 md:grid-cols-3 grid-cols-2"
                     }`}>
                         {filteredProducts.map((product) => (
-                            <div
+                            <ProductCard
                                 key={product.id}
-                                className={`group relative flex ${
-                                    viewLayout === "list"
-                                        ? "flex-col lg:flex-row lg:gap-6 lg:items-center border-b border-[#efefef] pb-6"
-                                        : "flex-col"
-                                }`}
-                            >
-                                {/* IMAGE BOX CONTAINER */}
-                                <div className={`relative bg-[#f9f9f9] overflow-hidden ${
-                                    viewLayout === "list"
-                                        ? "w-full lg:w-48 aspect-[4/5] lg:h-48 lg:flex-shrink-0"
-                                        : "aspect-[4/5] w-full"
-                                }`}>
-                                    <Image
-                                        src={product.image}
-                                        alt={product.name}
-                                        fill
-                                        sizes="(max-width: 1024px) 100vw, 33vw"
-                                        className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
-                                    />
-
-                                    <div className="absolute top-2 left-2 md:top-3 md:left-3 flex flex-col items-start gap-0.5 md:gap-1">
-                                        <span className="bg-[#d93838] text-white text-[8px] md:text-[9px] font-bold tracking-wider px-1.5 py-0.5">
-                                            {product.discount}
-                                        </span>
-                                    </div>
-
-                                    <button className="absolute top-2 right-2 md:top-3 md:right-3 p-1.5 bg-white/80 backdrop-blur-xs rounded-full md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xs hover:bg-white text-neutral-700">
-                                        <Heart className="w-4 h-4 stroke-[1.5]" />
-                                    </button>
-
-                                    <button className="absolute bottom-3 right-3 p-1.5 md:p-2 bg-white text-black shadow-md rounded-xs hover:bg-neutral-100 transition-all">
-                                        <Plus className="w-4 h-4 stroke-[2]" />
-                                    </button>
-                                </div>
-
-                                {/* DETAILS BOX AREA */}
-                                <div className={`flex flex-col text-center mt-3 md:mt-4 ${
-                                    viewLayout === "list"
-                                        ? "text-center lg:text-left mt-4 lg:mt-0 lg:flex-1"
-                                        : ""
-                                }`}>
-                                    <h3 className="text-sm md:text-[13px] text-neutral-800 tracking-wide font-normal group-hover:underline cursor-pointer">
-                                        {product.name}
-                                    </h3>
-                                    <div className={`flex items-center gap-1.5 justify-center mt-1 text-sm md:text-[13px] ${
-                                        viewLayout === "list" ? "justify-center lg:justify-start" : ""
-                                    }`}>
-                                        <span className="text-[#d93838] font-medium">KSH {product.price}.00</span>
-                                        <span className="text-neutral-400 line-through text-[11px] md:text-xs">KSH {product.originalPrice}.00</span>
-                                    </div>
-                                </div>
-
-                            </div>
+                                product={product}
+                                viewLayout={viewLayout}
+                                showDiscount={true}
+                            />
                         ))}
                     </div>
                 </section>
             </div>
+
+            {/* MOBILE FILTER ACTION SHEET */}
+            {isMobileFilterOpen && (
+                <div className="fixed inset-0 z-50 lg:hidden">
+                    <div
+                        className="absolute inset-0 bg-black/60"
+                        onClick={() => setIsMobileFilterOpen(false)}
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[85vh] overflow-hidden flex flex-col">
+                        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200">
+                            <h2 className="text-lg font-medium">Filters</h2>
+                            <button
+                                onClick={() => setIsMobileFilterOpen(false)}
+                                className="p-2 -mr-2 text-neutral-500"
+                            >
+                                <X className="w-6 h-6" />
+                            </button>
+                        </div>
+
+                        <div className="flex-1 overflow-auto p-6 space-y-8">
+                            {/* Product Type */}
+                            <div>
+                                <div className="text-[13px] font-medium tracking-widest mb-4 uppercase">Product type</div>
+                                <ul className="space-y-3 text-[15px]">
+                                    <li>
+                                        <button
+                                            onClick={() => setSelectedCategory(null)}
+                                            className={`w-full text-left py-1 ${!selectedCategory ? "text-black font-medium" : "text-neutral-600"}`}
+                                        >
+                                            All Items
+                                        </button>
+                                    </li>
+                                    {Object.entries(categoryCounts).map(([name, count]) => (
+                                        <li key={name}>
+                                            <button
+                                                onClick={() => setSelectedCategory(selectedCategory === name ? null : name)}
+                                                className={`w-full text-left py-1 flex justify-between ${selectedCategory === name ? "text-black font-medium" : "text-neutral-600"}`}
+                                            >
+                                                <span>{name}</span>
+                                                <span className="text-neutral-400">({count})</span>
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* Price Range */}
+                            <div>
+                                <div className="text-[13px] font-medium tracking-widest mb-4 uppercase">Price Range</div>
+                                <div className="px-2">
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="150"
+                                        step="1"
+                                        value={priceRange}
+                                        onChange={(e) => setPriceRange(Number(e.target.value))}
+                                        className="w-full accent-black"
+                                    />
+                                    <div className="flex justify-between text-sm mt-4 text-neutral-600">
+                                        <span>KSH 0</span>
+                                        <span>KSH {priceRange}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Footer */}
+                        <div className="border-t border-neutral-200 p-4 flex gap-3">
+                            <button
+                                onClick={resetFilters}
+                                className="flex-1 py-3.5 text-sm font-medium border border-neutral-300 rounded-full"
+                            >
+                                Reset
+                            </button>
+                            <button
+                                onClick={() => setIsMobileFilterOpen(false)}
+                                className="flex-1 py-3.5 text-sm font-medium bg-black text-white rounded-full"
+                            >
+                                Show Results
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
