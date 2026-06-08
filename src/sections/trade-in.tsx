@@ -15,7 +15,7 @@ export default function TradeInSection() {
                     {/* Image Container */}
                     <div className="w-full h-full flex items-center justify-center overflow-hidden bg-[#F5F2EB]">
                         <img
-                            src="/Trade-in.png"
+                            src="/images/Trade-in.png"
                             alt="Furniture Trade-In Program"
                             className="w-full h-auto max-h-[500px] md:max-h-full object-contain"
                             loading="lazy"
