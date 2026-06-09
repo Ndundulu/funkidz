@@ -22,12 +22,15 @@ interface SubCategoryContentProps {
     overrideTitle: string;
 }
 
-export default function SubCategoryContent({ initialProducts, overrideTitle }: SubCategoryContentProps) {
+export default function SubCategoryContent({ initialProducts = [], overrideTitle }: SubCategoryContentProps) {
+    // 1. Safe array fallback protection
+    const productsArray = initialProducts || [];
+
     // Automatically find the highest price in this subcategory to calibrate the slider max limit
     const maxPriceCeiling = useMemo(() => {
-        if (initialProducts.length === 0) return 150000; // Safe default ceiling (KSH)
-        return Math.max(...initialProducts.map((p) => p.price));
-    }, [initialProducts]);
+        if (productsArray.length === 0) return 150000; // Safe default ceiling (KSH)
+        return Math.max(...productsArray.map((p) => p.price));
+    }, [productsArray]);
 
     const [priceRange, setPriceRange] = useState<number>(maxPriceCeiling);
     const [sortBy, setSortBy] = useState<string>("featured");
@@ -35,16 +38,16 @@ export default function SubCategoryContent({ initialProducts, overrideTitle }: S
     const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
     const [isSortDropdownOpen, setIsSortDropdownOpen] = useState<boolean>(false);
 
-    // Clientside filtering and sorting operations
+    // 2. Reference the fallback array for your filter computations
     const filteredProducts = useMemo(() => {
-        return initialProducts
+        return productsArray
             .filter((product) => product.price <= priceRange)
             .sort((a, b) => {
                 if (sortBy === "price-low") return a.price - b.price;
                 if (sortBy === "price-high") return b.price - a.price;
                 return a.id - b.id;
             });
-    }, [initialProducts, priceRange, sortBy]);
+    }, [productsArray, priceRange, sortBy]);
 
     const resetFilters = () => {
         setPriceRange(maxPriceCeiling);

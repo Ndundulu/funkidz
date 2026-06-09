@@ -1,46 +1,18 @@
 import { createClient } from "@/lib/supabase/server";
-import { notFound } from "next/navigation";
-import SubCategoryContent from "@/app/beds/[filter]/SubCategoryContent";
+import BedsPageContent from "./BedsPageContent";
 
-interface SubCategoryPageProps {
-    params: Promise<{ filter: string }>;
-}
-
-export default async function BedSubCategoryPage({ params }: SubCategoryPageProps) {
-    const resolvedParams = await params;
-    const currentFilter = resolvedParams.filter.toLowerCase();
-
-    // Verify filter parameters against database keys
-    const validFilters = ["toddler", "twin", "bunk", "junior"];
-    if (!validFilters.includes(currentFilter)) {
-        notFound();
-    }
-
+export default async function BedsPage() {
     const supabase = await createClient();
 
+    // Fetch all products that belong to any of the bed variations
     const { data: products, error } = await supabase
         .from("products")
         .select("*")
-        .eq("category", "Beds")
-        .eq("filter_slug", currentFilter)
-        .order("created_at", { ascending: false });
+        .in("category", ["Toddler Beds", "Kids and Teen Beds", "Bunk & Loft Beds"]);
 
-    if (error) {
-        console.error("Supabase dynamic category filter fetching error:", error);
-    }
-
-    // Configure display headers
-    const titleMapping: Record<string, string> = {
-        toddler: "Toddler Beds",
-        twin: "Kids & Teen Beds",
-        bunk: "Bunk & Loft Beds",
-        junior: "Junior Beds",
-    };
+    if (error) return <div className="p-12 text-center text-red-500">Error loading beds catalog.</div>;
 
     return (
-        <SubCategoryContent
-            initialProducts={products || []}
-            overrideTitle={titleMapping[currentFilter]}
-        />
+        <BedsPageContent initialProducts={products || []} />
     );
 }

@@ -26,15 +26,19 @@ export default function BedsPageContent({ initialProducts }: { initialProducts: 
     const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
     const [isSortDropdownOpen, setIsSortDropdownOpen] = useState<boolean>(false);
 
-    // 1. First, strictly filter out everything that isn't a bed
-    // (Adjust 'bed' to match your database value, e.g., if your category names are lowercase or plural)
+    // Safely default to an empty array if initialProducts is undefined
+    const productsArray = initialProducts || [];
+
     const onlyBeds = useMemo(() => {
-        return initialProducts.filter((product) => {
+        return productsArray.filter((product) => {
             const categoryMatch = product.category?.toLowerCase().includes("bed");
             const slugMatch = product.filter_slug?.toLowerCase().includes("bed");
-            return categoryMatch || slugMatch;
+            // Fallback to true if your database strings differ, since the server already filtered it
+            return categoryMatch || slugMatch || true;
         });
-    }, [initialProducts]);
+    }, [productsArray]);
+
+
 
     // 2. Compute dynamic sub-categories (or product types) present ONLY among the beds
     const categoryCounts = useMemo(() => {
@@ -61,9 +65,15 @@ export default function BedsPageContent({ initialProducts }: { initialProducts: 
             });
     }, [onlyBeds, activeUrlFilter, selectedCategory, priceRange, sortBy]);
 
+    const maxPriceCeiling = useMemo(() => {
+        if (onlyBeds.length === 0) return 200000;
+        return Math.max(...onlyBeds.map((p) => p.price));
+    }, [onlyBeds]);
+
     const resetFilters = () => {
         setSelectedCategory(null);
-        setPriceRange(200000);
+        setPriceRange(maxPriceCeiling);
+        window.history.pushState(null, "", "/beds"); // Clears ?filter= from URL without page reload
     };
 
     return (
