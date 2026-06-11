@@ -10,7 +10,7 @@ const INITIAL_PRODUCTS = [
         name: "Junior bed",
         price: 28,
         originalPrice: 36,
-        image: "/Junior bed.jpg",
+        image: "/Junior-bed.jpg",
         category: "Decor",
     },
     {
@@ -18,7 +18,7 @@ const INITIAL_PRODUCTS = [
         name: "Double decker with pullout bed",
         price: 11,
         originalPrice: 15,
-        image: "/Double decker with pull out bed.jpg",
+        image: "/Double-decker-with-trundle.jpg",
         category: "Books",
     },
     {
@@ -26,7 +26,7 @@ const INITIAL_PRODUCTS = [
         name: "Change unit with a basin",
         price: 10,
         originalPrice: 14,
-        image: "/Changeunit Storage with basin.jpeg",
+        image: "/Changeunit-Storage-with-basin.jpeg",
         category: "Toys",
     },
     {
@@ -34,7 +34,7 @@ const INITIAL_PRODUCTS = [
         name: "Baby cot",
         price: 120,
         originalPrice: 140,
-        image: "/Baby cot Crib.jpg",
+        image: "/Baby-cot-Crib.jpg",
         category: "Decor",
     },
 ];

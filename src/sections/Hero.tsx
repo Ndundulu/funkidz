@@ -35,8 +35,8 @@ export default function HeroSlider() {
             tagline: "MADE-TO-ORDER PREMIUM CRAFTSMANSHIP",
             buttonText: "EXPLORE SERIES",
             link: "/shop",
-            imageLeft: "/babyroom.jpg",
-            imageRight: "/doubledocker.jpg",
+            imageLeft: "/images/roomsetup/babyroom.jpg",
+            imageRight: "/images/deckers/Double-decker-with-trundle.jpg",
         },
         {
             id: 3,
