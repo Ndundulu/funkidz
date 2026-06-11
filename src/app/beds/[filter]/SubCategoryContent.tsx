@@ -187,7 +187,10 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
                             {filteredProducts.map((product) => (
                                 <ProductCard
                                     key={product.id}
-                                    product={product}
+                                    product={{
+                                        ...product,
+                                        slug: product.slug ?? undefined // Forces null values into undefined to pass typecheck
+                                    }}
                                     viewLayout={viewLayout}
                                     showDiscount={true}
                                 />
