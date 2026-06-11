@@ -26,8 +26,8 @@ export default function HeroSlider() {
             tagline: "MODERN & SUSTAINABLE ECO-DESIGN",
             buttonText: "SHOP NOW",
             link: "/shop/moss",
-            imageLeft: "/backcover5.jpg",
-            imageRight: "/Storageunit.jpg",
+            imageLeft: "/images/roomsetup/backcover5.jpg",
+            imageRight: "/images/storage-dressers/Storageunit.jpg",
         },
         {
             id: 2,
@@ -44,8 +44,8 @@ export default function HeroSlider() {
             tagline: "SUSTAINABLE ARCHITECTURE FOR SCHOOLS",
             buttonText: "LEARN MORE",
             link: "/schools",
-            imageLeft: "/school2.jpg",
-            imageRight: "/school31.png",
+            imageLeft: "/images/projects/school2.jpg",
+            imageRight: "/images/projects/school31.png",
         }
     ];
 
