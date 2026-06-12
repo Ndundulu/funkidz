@@ -28,19 +28,19 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                             </div>
                             <Link href="/beds/toddler" onClick={onClose} className="group text-center block">
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/juniorbeds/toddler bed.png" alt="Toddler Beds" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/juniorbeds/toddler-bed.png" alt="Toddler Beds" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
                                 <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Toddler Beds</span>
                             </Link>
                             <Link href="/beds/twin" onClick={onClose} className="group text-center block">
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/juniorbeds/junior bed.jpg" alt="Twin Beds" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/juniorbeds/Flower-bed-Junior-bed.jpg" alt="Twin Beds" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
                                 <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Kids and Teen Beds</span>
                             </Link>
                             <Link href="/beds/bunk" onClick={onClose} className="group text-center block">
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/deckers/Double decker with Study desk.jpg" alt="Bunk Beds" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/deckers/Double-decker-with-Study-desk.jpg" alt="Bunk Beds" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
                                 <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Bunk Beds</span>
                             </Link>
