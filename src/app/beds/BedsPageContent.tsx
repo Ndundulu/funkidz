@@ -237,9 +237,10 @@ export default function BedsPageContent({ initialProducts }: { initialProducts: 
                                         key={product.id}
                                         product={{
                                             ...product,
-                                            originalPrice: product.original_price,
-                                            filterSlug: product.filter_slug,
-                                        }}
+                                            original_price: product.original_price,
+                                            filter_slug: product.filter_slug,
+                                            filterSlug: product.filter_slug, // Keeps backward compatibility with your filtering code
+                                        } as any}
                                         viewLayout={viewLayout}
                                         showDiscount={true}
                                     />

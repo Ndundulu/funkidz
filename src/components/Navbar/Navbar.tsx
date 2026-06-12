@@ -83,7 +83,7 @@ export default function Navbar() {
                 {/* LOGO */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0 flex-shrink-0">
                     <Link href="/" onClick={closeAllGuides} className="flex items-center">
-                        <Image src="/funkidz.png" alt="Funkidz Logo" width={125} height={36} className="h-8 w-auto object-contain" priority />
+                        <Image src="/images/funkidz.png" alt="Funkidz Logo" width={125} height={36} className="h-8 w-auto object-contain" priority />
                     </Link>
                 </div>
 

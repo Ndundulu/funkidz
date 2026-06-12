@@ -5,13 +5,13 @@ type Product = {
     id: number;
     name: string;
     price: number;
-    originalPrice?: number;
+    original_price?: number | null; // Updated to match Supabase schema
     image: string;
     category: string;
     filterSlug?: string;
-    slug?: string;
-    description?: string;
-    stock?: number;
+    slug?: string | null;
+    description?: string | null;
+    stock?: number | null;
 };
 
 type ProductCardProps = {
@@ -26,11 +26,11 @@ export default function ProductCard({
                                         showDiscount = false
                                     }: ProductCardProps) {
 
-    // Calculate discount dynamically
-    const hasDiscount = product.originalPrice && product.originalPrice > product.price;
+    // Calculate discount dynamically using the database key structure
+    const hasDiscount = product.original_price && product.original_price > product.price;
 
     const discountPercent = hasDiscount
-        ? Math.round(((product.originalPrice! - product.price) / product.originalPrice!) * 100)
+        ? Math.round(((product.original_price! - product.price) / product.original_price!) * 100)
         : 0;
 
     const discountLabel = `SAVE ${discountPercent}%`;
@@ -81,16 +81,17 @@ export default function ProductCard({
                     {product.name}
                 </h3>
 
-                <div className={`flex items-center gap-1.5 justify-center mt-1 text-sm md:text-[13px] ${
+                <div className={`flex items-center gap-2 justify-center mt-1 text-sm md:text-[13px] ${
                     viewLayout === "list" ? "justify-center lg:justify-start" : ""
                 }`}>
-                    <span className="text-[#d93838] font-medium">
+                    {/* Flips to Red text color dynamically if item has discount active */}
+                    <span className={`font-medium ${hasDiscount && showDiscount ? "text-[#d93838]" : "text-neutral-900"}`}>
                         KSH {product.price.toLocaleString()}.00
                     </span>
 
                     {showDiscount && hasDiscount && (
-                        <span className="text-neutral-400 line-through text-[11px] md:text-xs">
-                            KSH {product.originalPrice!.toLocaleString()}.00
+                        <span className="text-neutral-400 line-through text-[11px] md:text-xs font-normal">
+                            KSH {product.original_price!.toLocaleString()}.00
                         </span>
                     )}
                 </div>
