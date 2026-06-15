@@ -7,7 +7,7 @@ const products = [
         id: 1,
         title: "Crib",
         price: "KSH 142,000",
-        image: "/images/cribs/Crib-Baby-cot.jpeg",
+        image: "/images/cribs/standardcrib/Standard-Cribs.jpeg",
         badges: ["BEST SELLER"],
     },
     {
@@ -21,7 +21,7 @@ const products = [
         id: 3,
         title: "Change Unit",
         price: "KSH 52,920",
-        image: "/images/changeunit/Changeunit-Storage-with-bath-basin.jpg",
+        image: "/images/storage-dressers/Changeunit-Storage-with-bath-basin.jpg",
         badges: ["FREE INSTALLATION", "BEST SELLER"],
     },
     {
@@ -113,7 +113,7 @@ export default function BestSellers() {
                 {/* Proportional Shop All Anchor */}
                 <div className="text-center mt-8 md:mt-20">
                     <a
-                        href="#shop-all"
+                        href="/shop"
                         className="inline-block text-[10px] md:text-sm font-medium uppercase tracking-widest text-black border-b border-black pb-0.5 hover:text-gray-500 hover:border-gray-500 transition-colors"
                     >
                         Shop All

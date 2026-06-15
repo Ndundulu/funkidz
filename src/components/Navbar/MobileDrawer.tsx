@@ -59,16 +59,12 @@ export default function MobileDrawer({ isOpen, setIsOpen, activeGuide, setActive
                                 <h3 className="font-serif text-2xl font-normal text-neutral-800 mb-6">Cribs</h3>
                                 <div className="flex gap-4 mb-8 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
                                     <Link href="/cribs?filter=convertible" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
-                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden"><Image src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&q=80" alt="Cribs" fill sizes="150px" className="object-cover" /></div>
-                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Convertible Cribs</p>
+                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden"><Image src="/images/cribs/convertablecrib/convertable-crib.png" alt="ConvertableCribs" fill sizes="150px" className="object-cover" /></div>
+                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Convertable Cribs</p>
                                     </Link>
-                                    <Link href="/cribs?filter=conversion-kits" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
-                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden"><Image src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=400&q=80" alt="Conversion Kits" fill sizes="150px" className="object-cover" /></div>
-                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Conversion Kits</p>
-                                    </Link>
-                                    <Link href="/cribs?filter=mattresses" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
-                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden"><Image src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=400&q=80" alt="Mattresses" fill sizes="150px" className="object-cover" /></div>
-                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Crib Mattresses</p>
+                                    <Link href="/cribs?filter=standard" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
+                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden"><Image src="/images/cribs/standardcrib/Standard-Cribs.jpeg" alt="Standard Cribs" fill sizes="150px" className="object-cover" /></div>
+                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Standard Cribs</p>
                                     </Link>
                                 </div>
                                 <Link href="/cribs" onClick={resetAndClose} className="w-full bg-[#222] text-white py-3.5 text-center text-xs uppercase tracking-widest font-semibold block rounded-sm shadow-xs">Shop All Cribs</Link>
@@ -78,22 +74,55 @@ export default function MobileDrawer({ isOpen, setIsOpen, activeGuide, setActive
                         {/* DRESSERS SUB-DRAWER */}
                         {activeGuide === "DRESSERS" && (
                             <>
-                                <h3 className="font-serif text-2xl font-normal text-neutral-800 mb-6">Dressers</h3>
+                                <h3 className="font-serif text-2xl font-normal text-neutral-800 mb-6">Organizers</h3>
                                 <div className="flex gap-4 mb-8 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
-                                    <Link href="/dressers-storage?filter=dressers" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
-                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden"><Image src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=400&q=80" alt="Dressers" fill sizes="150px" className="object-cover" /></div>
-                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Dressers</p>
+
+                                    {/* Shelves */}
+                                    <Link href="/storage-dressers?filter=shelf" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
+                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden">
+                                            <Image src="/images/storage-dressers/floating-shelf.jpg" alt="Shelves" fill sizes="150px" className="object-cover" />
+                                        </div>
+                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Shelves</p>
                                     </Link>
-                                    <Link href="/dressers-storage?filter=bookcases" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
-                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-3 border border-neutral-100 rounded-lg overflow-hidden"><Image src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=400&q=80" alt="Bookcases" fill sizes="150px" className="object-cover" /></div>
-                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Bookcases</p>
+
+                                    {/* Change Units */}
+                                    <Link href="/storage-dressers?filter=change" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
+                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-3 border border-neutral-100 rounded-lg overflow-hidden">
+                                            <Image src="/images/storage-dressers/Changeunit-Storage-with-basin.jpeg" alt="Change Units" fill sizes="150px" className="object-cover" />
+                                        </div>
+                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Change Units</p>
                                     </Link>
-                                    <Link href="/dressers-storage?filter=toy-boxes" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
-                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden"><Image src="https://images.unsplash.com/photo-1532588213355-52317771dce6?auto=format&fit=crop&w=400&q=80" alt="Toy Boxes" fill sizes="150px" className="object-cover" /></div>
+
+                                    {/* Chest of Drawers */}
+                                    <Link href="/storage-dressers?filter=chest" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
+                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden">
+                                            <Image src="/images/storage-dressers/chest.png" alt="Chest of Drawers" fill sizes="150px" className="object-cover" />
+                                        </div>
+                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Chest of Drawers</p>
+                                    </Link>
+
+                                    {/* Toy Storage */}
+                                    <Link href="/storage-dressers?filter=toy" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
+                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden">
+                                            <Image src="/images/storage-dressers/toy-chest.png" alt="Toy Storage" fill sizes="150px" className="object-cover" />
+                                        </div>
                                         <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Toy Boxes</p>
                                     </Link>
+
+                                    {/* Wardrobes */}
+                                    <Link href="/storage-dressers?filter=wardrobe" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
+                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden">
+                                            <Image src="/images/storage-dressers/wardrobe.png" alt="Wardrobes" fill sizes="150px" className="object-cover" />
+                                        </div>
+                                        <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Wardrobe</p>
+                                    </Link>
+
                                 </div>
-                                <Link href="/dressers-storage" onClick={resetAndClose} className="w-full bg-[#222] text-white py-3.5 text-center text-xs uppercase tracking-widest font-semibold block rounded-sm shadow-xs">Shop All Storage</Link>
+
+                                {/* Shop All link typo safely corrected here */}
+                                <Link href="/storage-dressers" onClick={resetAndClose} className="w-full bg-[#222] text-white py-3.5 text-center text-xs uppercase tracking-widest font-semibold block rounded-sm shadow-xs">
+                                    Shop All Storage
+                                </Link>
                             </>
                         )}
                     </div>

@@ -52,28 +52,69 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                         <>
                             <div className="flex flex-col space-y-3.5 pt-2">
                                 <h3 className="font-serif text-base text-neutral-800 border-b border-neutral-100 pb-2">Cribs</h3>
-                                <Link href="/cribs?filter=convertible" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Convertible Cribs</Link>
-                                <Link href="/cribs?filter=conversion-kits" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Conversion Kits</Link>
-                                <Link href="/cribs?filter=mattresses" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Mattresses Pads & Changers</Link>
-                                <Link href="/cribs" onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">Shop All →</Link>
+
+                                <Link
+                                    href="/cribs?filter=convertible"
+                                    onClick={onClose}
+                                    className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors"
+                                >
+                                    Convertible Cribs
+                                </Link>
+
+                                <Link
+                                    href="/cribs?filter=standard"
+                                    onClick={onClose}
+                                    className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors"
+                                >
+                                    Standard Cribs
+                                </Link>
+
+                                <Link
+                                    href="/cribs"
+                                    onClick={onClose}
+                                    className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity"
+                                >
+                                    Shop All →
+                                </Link>
                             </div>
-                            <Link href="/cribs?filter=standard" onClick={onClose} className="group text-center block">
+
+                            {/* Image Cards */}
+                            <Link
+                                href="/cribs?filter=standard"
+                                onClick={onClose}
+                                className="group text-center block"
+                            >
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&q=80" alt="Cribs" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image
+                                        src="/images/cribs/standardcrib/Standard-Cribs.jpeg"
+                                        alt="Standard Cribs"
+                                        fill
+                                        sizes="25vw"
+                                        className="object-cover group-hover:scale-102 transition-transform duration-300"
+                                    />
                                 </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Cribs</span>
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
+                                    Standard Cribs
+                                </span>
                             </Link>
-                            <Link href="/cribs?filter=conversion-kits" onClick={onClose} className="group text-center block">
+
+                            <Link
+                                href="/cribs?filter=convertible"
+                                onClick={onClose}
+                                className="group text-center block"
+                            >
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=400&q=80" alt="Conversion Kits" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image
+                                        src="/images/cribs/convertablecrib/convertable-crib.png"
+                                        alt="Convertible Cribs"
+                                        fill
+                                        sizes="25vw"
+                                        className="object-cover group-hover:scale-102 transition-transform duration-300"
+                                    />
                                 </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Conversion Kits</span>
-                            </Link>
-                            <Link href="/cribs?filter=mattresses" onClick={onClose} className="group text-center block">
-                                <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=400&q=80" alt="Mattresses" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
-                                </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Crib Mattresses</span>
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
+                                      Convertible Cribs
+                                </span>
                             </Link>
                         </>
                     )}
@@ -83,28 +124,32 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                         <>
                             <div className="flex flex-col space-y-3.5 pt-2">
                                 <h3 className="font-serif text-base text-neutral-800 border-b border-neutral-100 pb-2">Dressers & Storage</h3>
-                                <Link href="/dressers-storage?filter=dressers" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">3 & 6 Drawer Dressers</Link>
-                                <Link href="/dressers-storage?filter=bookcases" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Bookcases & Shelves</Link>
-                                <Link href="/dressers-storage?filter=toy-boxes" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Toy Storage</Link>
-                                <Link href="/dressers-storage" onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">Shop All →</Link>
+                                <Link href="/storage-dressers?filter=shelf" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Shelves</Link>
+                                <Link href="/storage-dressers?filter=change" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Change Unit</Link>
+                                <Link href="/storage-dressers?filter=chest" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Chest of Drawers</Link>
+                                <Link href="/storage-dressers?filter=toy" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Toy Storage</Link>
+                                <Link href="/storage-dressers?filter=wardrobe" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Wardrobe</Link>
+                                <Link href="/storage-dressers" onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">Shop All →</Link>
                             </div>
-                            <Link href="/dressers-storage?filter=dressers" onClick={onClose} className="group text-center block">
+
+                            {/* Updated image paths below to use the same standardized query parameters */}
+                            <Link href="/storage-dressers?filter=shelf" onClick={onClose} className="group text-center block">
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=400&q=80" alt="Dressers" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/storage-dressers/floating-shelf.jpg" alt="Dressers" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Dressers</span>
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Shelves</span>
                             </Link>
-                            <Link href="/dressers-storage?filter=bookcases" onClick={onClose} className="group text-center block">
+                            <Link href="/storage-dressers?filter=change" onClick={onClose} className="group text-center block">
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=400&q=80" alt="Bookcases" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/storage-dressers/Changeunit-Storage-with-basin.jpeg" alt="Bookcases" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Bookcases</span>
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Change Unit</span>
                             </Link>
-                            <Link href="/dressers-storage?filter=toy-boxes" onClick={onClose} className="group text-center block">
+                            <Link href="/storage-dressers?filter=toy" onClick={onClose} className="group text-center block">
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="https://images.unsplash.com/photo-1532588213355-52317771dce6?auto=format&fit=crop&w=400&q=80" alt="Toy Boxes" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/storage-dressers/toy-chest.png" alt="Toy Boxes" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Toy Boxes</span>
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Storage</span>
                             </Link>
                         </>
                     )}
