@@ -37,15 +37,21 @@ export default function MobileDrawer({ isOpen, setIsOpen, activeGuide, setActive
                                 <h3 className="font-serif text-2xl font-normal text-neutral-800 mb-6">Beds</h3>
                                 <div className="flex gap-4 mb-8 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
                                     <Link href="/beds/toddler" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
-                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden"><Image src="/images/juniorbeds/toddler bed.png" alt="Toddler Beds" fill sizes="150px" className="object-cover" /></div>
+                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden">
+                                            <Image src="/images/juniorbeds/toddler-bed.png" alt="Toddler Beds" fill sizes="150px" className="object-cover" />
+                                        </div>
                                         <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Toddler Beds</p>
                                     </Link>
                                     <Link href="/beds/twin" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
-                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden"><Image src="/images/juniorbeds/junior bed.jpg" alt="Twin Beds" fill sizes="150px" className="object-cover" /></div>
+                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden">
+                                            <Image src="/images/juniorbeds/Junior-bed.jpg" alt="Twin Beds" fill sizes="150px" className="object-cover" />
+                                        </div>
                                         <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Kids Beds</p>
                                     </Link>
                                     <Link href="/beds/bunk" onClick={resetAndClose} className="block flex-shrink-0 w-36 snap-start">
-                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden"><Image src="/images/deckers/Double decker with Study desk.jpg" alt="Bunk Beds" fill sizes="150px" className="object-cover" /></div>
+                                        <div className="relative aspect-[4/3] bg-neutral-50 mb-2 border border-neutral-100 rounded-lg overflow-hidden">
+                                            <Image src="/images/deckers/Double-decker-with-Study-desk.jpg" alt="Bunk Beds" fill sizes="150px" className="object-cover" />
+                                        </div>
                                         <p className="text-[10px] text-center tracking-widest text-neutral-500 font-semibold uppercase">Bunk Beds</p>
                                     </Link>
                                 </div>
