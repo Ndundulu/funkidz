@@ -1,29 +1,49 @@
 import { createClient } from "@/lib/supabase/server";
 import { domains } from "./categories";
 
-export async function getProducts(domain: string, key: string, value: string) {
+export async function getProducts(
+    domain: keyof typeof domains,
+    key: string,
+    value: string
+) {
     const supabase = await createClient();
 
-    const config =
-        domains[domain as keyof typeof domains]?.[key]?.[value];
+    // 1. Cast the specific domain object to a flexible nested Record type
+    const domainConfig = domains[domain] as Record<string, Record<string, any>>;
 
-    if (!config) return { error: "Invalid filter", products: [] };
+    // 2. Safe dynamic lookup using optional chaining
+    const config = domainConfig?.[key]?.[value];
+
+    // 3. Fallback if the key/value combination doesn't exist
+    if (!config) {
+        return {
+            error: "Invalid filter",
+            products: [],
+        };
+    }
 
     let query = supabase
         .from("products")
         .select("*")
-        .eq("category", config.db);
+        .eq("domain", config.db);
 
-    if (key === "ageGroups") {
-        // Change .cs() to .contains()
-        query = query.contains("sub_category", [value.toLowerCase()]);
+    // Apply category/filter if it exists
+    if (config.category) {
+        query = query.eq("category", config.category);
     }
 
     const { data, error } = await query;
 
+    if (error) {
+        console.error("Supabase error:", error);
+        return {
+            error: error.message,
+            products: [],
+        };
+    }
+
     return {
-        error,
-        products: data || [],
-        title: config.label,
+        error: null,
+        products: data ?? [],
     };
 }
