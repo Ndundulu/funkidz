@@ -10,6 +10,12 @@ interface MegaMenuProps {
 export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
     if (!activeGuide) return null;
 
+    const shopLinks = {
+        HOME: "/shop/home",
+        EDUCATION: "/shop/education",
+        CLUB: "/shop/club",
+    };
+
     return (
         <>
             <div className="hidden lg:block fixed inset-0 bg-black/25 top-[81px] z-40 transition-opacity animate-fadeIn" onClick={onClose} />
@@ -49,7 +55,11 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                                     Teen (13 - 19 years)
                                 </Link>
 
-                                <Link href={activeGuide === "HOME" ? "/shop/home" : activeGuide === "EDUCATION" ? "/shop/education" : "/shop/club"} onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">
+                                <Link
+                                    href={shopLinks[activeGuide]}
+                                    onClick={onClose}
+                                    className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity"
+                                >
                                     Shop All {activeGuide}
                                 </Link>
 
@@ -117,8 +127,12 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                                     High School
                                 </Link>
 
-                                <Link href="/education" onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">
-                                    Shop All Education →
+                                <Link
+                                    href={shopLinks[activeGuide]}
+                                    onClick={onClose}
+                                    className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity"
+                                >
+                                    Shop All {activeGuide}
                                 </Link>
 
                             </div>
@@ -127,7 +141,7 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                             <Link href="/education/ecde" onClick={onClose} className="group text-center block">
 
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/categories/ecde.jpg" alt="ECDE" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/projects/School-Chair.png" alt="ECDE" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
 
                                 <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
@@ -140,7 +154,7 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                             <Link href="/education/primary" onClick={onClose} className="group text-center block">
 
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/categories/primary.jpg" alt="Primary School" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/projects/school30.png" alt="Primary School" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
 
                                 <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
@@ -153,7 +167,7 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                             <Link href="/education/highschool" onClick={onClose} className="group text-center block">
 
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/categories/highschool.jpg" alt="High School" fill sizes="25vw" className="object-cover group-hover:text-black" />
+                                    <Image src="/images/projects/school2.jpg" alt="High School" fill sizes="25vw" className="object-cover group-hover:text-black" />
                                 </div>
 
                                 <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
@@ -185,8 +199,12 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                                     Science
                                 </Link>
 
-                                <Link href="/club" onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">
-                                    Explore Club →
+                                <Link
+                                    href={shopLinks[activeGuide]}
+                                    onClick={onClose}
+                                    className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity"
+                                >
+                                    Shop All {activeGuide}
                                 </Link>
 
                             </div>
