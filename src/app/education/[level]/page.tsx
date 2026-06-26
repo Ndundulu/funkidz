@@ -2,26 +2,30 @@ import { getProducts } from "@/lib/domain/resolvers";
 import SubCategoryContent from "@/app/beds/[filter]/SubCategoryContent";
 
 interface PageProps {
-    params: Promise<{ level: string }>;
+    params: { level: string };
 }
 
 export default async function Page({ params }: PageProps) {
-    const { level } = await params;
+    const { level } = params;
 
-    const { products, title, error } = await getProducts(
+    const { products, error } = await getProducts(
         "education",
         "levels",
         level
     );
 
     if (error) {
-        return <div>Error loading products.</div>;
+        return <div>Coming soon</div>;
     }
+
+    // simple UI title fallback (since backend doesn't return title)
+    const overrideTitle =
+        level.charAt(0).toUpperCase() + level.slice(1);
 
     return (
         <SubCategoryContent
             initialProducts={products}
-            overrideTitle={title}
+            overrideTitle={overrideTitle}
         />
     );
 }

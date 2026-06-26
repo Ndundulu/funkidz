@@ -1,27 +1,15 @@
-import { getProducts } from "@/lib/domain/resolvers";
-import SubCategoryContent from "@/app/beds/[filter]/SubCategoryContent";
-
-interface PageProps {
-    params: Promise<{ level: string }>;
-}
-
-export default async function Page({ params }: PageProps) {
-    const { level } = await params;
-
-    const { products, title, error } = await getProducts(
-        "education",
-        "levels",
-        level
-    );
-
-    if (error) {
-        return <div>Coming soon.</div>;
-    }
-
+export default function Page() {
     return (
-        <SubCategoryContent
-            initialProducts={products}
-            overrideTitle={title}
-        />
+        <div className="min-h-screen flex items-center justify-center">
+            <div className="text-center">
+                <h1 className="text-3xl font-bold">
+                    Coming Soon
+                </h1>
+
+                <p className="mt-4 text-gray-600">
+                    This page is currently being worked on. Please check back later.
+                </p>
+            </div>
+        </div>
     );
 }
