@@ -2,11 +2,11 @@ import { getProducts } from "@/lib/domain/resolvers";
 import SubCategoryContent from "@/app/beds/[filter]/SubCategoryContent";
 
 interface PageProps {
-    params: { ageGroup: string };
+    params: Promise<{ ageGroup: string }>;
 }
 
 export default async function Page({ params }: PageProps) {
-    const { ageGroup } = params;
+    const { ageGroup } = await params;
 
     const { products, error } = await getProducts(
         "home",
@@ -18,7 +18,6 @@ export default async function Page({ params }: PageProps) {
         return <div>Error loading products</div>;
     }
 
-    // fallback title (since backend does not provide it)
     const overrideTitle =
         ageGroup.charAt(0).toUpperCase() + ageGroup.slice(1);
 
