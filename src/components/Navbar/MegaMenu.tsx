@@ -13,149 +13,218 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
     return (
         <>
             <div className="hidden lg:block fixed inset-0 bg-black/25 top-[81px] z-40 transition-opacity animate-fadeIn" onClick={onClose} />
+
             <div className="hidden lg:block absolute top-full left-0 w-full bg-white border-b border-[#efefef] shadow-xl z-50 animate-slideDown">
+
                 <div className="max-w-7xl mx-auto px-12 py-10 grid grid-cols-4 gap-8">
 
-                    {/* BEDS MENU */}
-                    {activeGuide === "BEDS" && (
+
+                    {/* HOME MENU */}
+                    {activeGuide === "HOME" && (
+                        <>
+
+                            <div className="flex flex-col space-y-3.5 pt-2">
+
+                                <h3 className="font-serif text-base text-neutral-800 border-b border-neutral-100 pb-2">
+                                    Home
+                                </h3>
+
+                                <Link href="/home/newborn" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
+                                    Newborn (0 - 3 months)
+                                </Link>
+
+                                <Link href="/home/infant" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
+                                    Infant (4 - 11 months)
+                                </Link>
+
+                                <Link href="/home/toddler" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
+                                    Toddler (1 - 3 years)
+                                </Link>
+
+                                <Link href="/home/tween" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
+                                    Tween (4 - 12 years)
+                                </Link>
+
+                                <Link href="/home/teen" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
+                                    Teen (13 - 19 years)
+                                </Link>
+
+                                <Link href={activeGuide === "HOME" ? "/shop/home" : activeGuide === "EDUCATION" ? "/shop/education" : "/shop/club"} onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">
+                                    Shop All {activeGuide}
+                                </Link>
+
+                            </div>
+
+
+                            <Link href="/home/newborn" onClick={onClose} className="group text-center block">
+
+                                <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
+                                    <Image src="/images/cribs/standardcrib/Standard-Cot.jpg" alt="Newborn" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                </div>
+
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
+                                    Newborn
+                                </span>
+
+                            </Link>
+
+
+                            <Link href="/home/infant" onClick={onClose} className="group text-center block">
+
+                                <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
+                                    <Image src="/images/cribs/standardcrib/Infant-crib.jpeg" alt="Infant" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                </div>
+
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
+                                    Infant
+                                </span>
+
+                            </Link>
+
+
+                            <Link href="/home/toddler" onClick={onClose} className="group text-center block">
+
+                                <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
+                                    <Image src="/images/juniorbeds/toddler-bed.png" alt="Toddler" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                </div>
+
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
+                                    Toddler
+                                </span>
+
+                            </Link>
+
+                        </>
+                    )}
+                    {/* EDUCATION MENU */}
+                    {activeGuide === "EDUCATION" && (
                         <>
                             <div className="flex flex-col space-y-3.5 pt-2">
-                                <h3 className="font-serif text-base text-neutral-800 border-b border-neutral-100 pb-2">Beds</h3>
-                                <Link href="/beds/toddler" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Toddler Beds</Link>
-                                <Link href="/beds/twin" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Kids and Teen Beds</Link>
-                                <Link href="/beds/bunk" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Bunk & Loft Beds</Link>
-                                <Link href="/beds" onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">Shop All Beds →</Link>
+
+                                <h3 className="font-serif text-base text-neutral-800 border-b border-neutral-100 pb-2">
+                                    Education
+                                </h3>
+
+                                <Link href="/education/ecde" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
+                                    ECDE
+                                </Link>
+
+                                <Link href="/education/primary" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
+                                    Primary School
+                                </Link>
+
+                                <Link href="/education/highschool" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
+                                    High School
+                                </Link>
+
+                                <Link href="/education" onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">
+                                    Shop All Education →
+                                </Link>
+
                             </div>
-                            <Link href="/beds/toddler" onClick={onClose} className="group text-center block">
+
+
+                            <Link href="/education/ecde" onClick={onClose} className="group text-center block">
+
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/juniorbeds/toddler-bed.png" alt="Toddler Beds" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/categories/ecde.jpg" alt="ECDE" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Toddler Beds</span>
+
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
+                                    ECDE
+                                </span>
+
                             </Link>
-                            <Link href="/beds/twin" onClick={onClose} className="group text-center block">
+
+
+                            <Link href="/education/primary" onClick={onClose} className="group text-center block">
+
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/juniorbeds/Flower-bed-Junior-bed.jpg" alt="Twin Beds" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/categories/primary.jpg" alt="Primary School" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Kids and Teen Beds</span>
+
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
+                                    Primary School
+                                </span>
+
                             </Link>
-                            <Link href="/beds/bunk" onClick={onClose} className="group text-center block">
+
+
+                            <Link href="/education/highschool" onClick={onClose} className="group text-center block">
+
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/deckers/Double-decker-with-Study-desk.jpg" alt="Bunk Beds" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/categories/highschool.jpg" alt="High School" fill sizes="25vw" className="object-cover group-hover:text-black" />
                                 </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Bunk Beds</span>
+
+                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
+                                    High School
+                                </span>
+
                             </Link>
+
+
                         </>
                     )}
 
-                    {/* CRIBS MENU */}
-                    {activeGuide === "CRIBS" && (
+
+                    {/* CLUB MENU */}
+                    {activeGuide === "CLUB" && (
                         <>
+
                             <div className="flex flex-col space-y-3.5 pt-2">
-                                <h3 className="font-serif text-base text-neutral-800 border-b border-neutral-100 pb-2">Cribs</h3>
 
-                                <Link
-                                    href="/cribs?filter=convertible"
-                                    onClick={onClose}
-                                    className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors"
-                                >
-                                    Convertible Cribs
+                                <h3 className="font-serif text-base text-neutral-800 border-b border-neutral-100 pb-2">
+                                    Club
+                                </h3>
+
+                                <Link href="/club/environment" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
+                                    Environment
                                 </Link>
 
-                                <Link
-                                    href="/cribs?filter=standard"
-                                    onClick={onClose}
-                                    className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors"
-                                >
-                                    Standard Cribs
+                                <Link href="/club/science" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
+                                    Science
                                 </Link>
 
-                                <Link
-                                    href="/cribs"
-                                    onClick={onClose}
-                                    className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity"
-                                >
-                                    Shop All →
+                                <Link href="/club" onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">
+                                    Explore Club →
                                 </Link>
+
                             </div>
 
-                            {/* Image Cards */}
-                            <Link
-                                href="/cribs?filter=standard"
-                                onClick={onClose}
-                                className="group text-center block"
-                            >
+
+                            <Link href="/club/environment" onClick={onClose} className="group text-center block">
+
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image
-                                        src="/images/cribs/standardcrib/Standard-Cribs.jpeg"
-                                        alt="Standard Cribs"
-                                        fill
-                                        sizes="25vw"
-                                        className="object-cover group-hover:scale-102 transition-transform duration-300"
-                                    />
+                                    <Image src="/images/categories/environment.jpg" alt="Environment" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
+
                                 <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
-                                    Standard Cribs
+                                    Environment
                                 </span>
+
                             </Link>
 
-                            <Link
-                                href="/cribs?filter=convertible"
-                                onClick={onClose}
-                                className="group text-center block"
-                            >
+
+                            <Link href="/club/science" onClick={onClose} className="group text-center block">
+
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image
-                                        src="/images/cribs/convertablecrib/convertable-crib.png"
-                                        alt="Convertible Cribs"
-                                        fill
-                                        sizes="25vw"
-                                        className="object-cover group-hover:scale-102 transition-transform duration-300"
-                                    />
+                                    <Image src="/images/categories/science.jpg" alt="Science" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
+
                                 <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
-                                      Convertible Cribs
+                                    Science
                                 </span>
-                            </Link>
-                        </>
-                    )}
 
-                    {/* DRESSERS MENU */}
-                    {activeGuide === "DRESSERS" && (
-                        <>
-                            <div className="flex flex-col space-y-3.5 pt-2">
-                                <h3 className="font-serif text-base text-neutral-800 border-b border-neutral-100 pb-2">Dressers & Storage</h3>
-                                <Link href="/storage-dressers?filter=shelf" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Shelves</Link>
-                                <Link href="/storage-dressers?filter=change" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Change Unit</Link>
-                                <Link href="/storage-dressers?filter=chest" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Chest of Drawers</Link>
-                                <Link href="/storage-dressers?filter=toy" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Toy Storage</Link>
-                                <Link href="/storage-dressers?filter=wardrobe" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">Wardrobe</Link>
-                                <Link href="/storage-dressers" onClick={onClose} className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity">Shop All →</Link>
-                            </div>
+                            </Link>
 
-                            {/* Updated image paths below to use the same standardized query parameters */}
-                            <Link href="/storage-dressers?filter=shelf" onClick={onClose} className="group text-center block">
-                                <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/storage-dressers/floating-shelf.jpg" alt="Dressers" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
-                                </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Shelves</span>
-                            </Link>
-                            <Link href="/storage-dressers?filter=change" onClick={onClose} className="group text-center block">
-                                <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/storage-dressers/Changeunit-Storage-with-basin.jpeg" alt="Bookcases" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
-                                </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Change Unit</span>
-                            </Link>
-                            <Link href="/storage-dressers?filter=toy" onClick={onClose} className="group text-center block">
-                                <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/storage-dressers/toy-chest.png" alt="Toy Boxes" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
-                                </div>
-                                <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">Storage</span>
-                            </Link>
+
                         </>
                     )}
 
                 </div>
+
             </div>
+
         </>
     );
 }

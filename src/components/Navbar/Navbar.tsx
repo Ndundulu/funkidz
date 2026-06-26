@@ -10,16 +10,16 @@ import MobileDrawer from "./MobileDrawer";
 
 const navLinks = [
     { href: "/shop", label: "SHOP ALL" },
-    { href: "#", label: "BEDS", isGuideTrigger: true, guideKey: "BEDS" as const },
-    { href: "#", label: "CRIBS", isGuideTrigger: true, guideKey: "CRIBS" as const },
-    { href: "#", label: "DRESSERS & STORAGE", isGuideTrigger: true, guideKey: "DRESSERS" as const },
+    { href: "#", label: "HOME", isGuideTrigger: true, guideKey: "HOME" as const },
+    { href: "#", label: "EDUCATION", isGuideTrigger: true, guideKey: "EDUCATION" as const },
+    { href: "/hospital", label: "HOSPITAL" },
+    { href: "/parent", label: "PARENT" },
+    { href: "#", label: "CLUB", isGuideTrigger: true, guideKey: "CLUB" as const },
     { href: "/sale", label: "SALE" },
     { href: "/#trade-in", label: "TRADE-IN" },
     { href: "/contact", label: "CONTACT" },
 ];
-
-export type GuideKey = "CRIBS" | "BEDS" | "DRESSERS" | null;
-
+export type GuideKey = "HOME" | "EDUCATION" | "CLUB" | null;
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -153,7 +153,6 @@ export default function Navbar() {
             {/* ISOLATED SUB-PANELS */}
             <MegaMenu activeGuide={activeGuide} onClose={closeAllGuides} />
             <SearchBar isSearchOpen={isSearchOpen} inputRef={searchInputRef} />
-            <MobileDrawer isOpen={isOpen} setIsOpen={setIsOpen} activeGuide={activeGuide} setActiveGuide={setActiveGuide} onClose={closeAllGuides} />
-        </header>
+            <MobileDrawer isOpen={isOpen} setIsOpen={setIsOpen} onClose={closeAllGuides} />        </header>
     );
 }

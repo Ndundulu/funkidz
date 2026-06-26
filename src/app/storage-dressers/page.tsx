@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import SubCategoryContent from "../beds/[filter]/SubCategoryContent";
+import SubCategoryContent from "@/app/beds/[filter]/SubCategoryContent";
 
 interface PageProps {
     searchParams: Promise<{ filter?: string }>;

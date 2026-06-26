@@ -1,10 +1,7 @@
 "use client";
-
 import { useState, useMemo } from "react";
 import { Grid, LayoutGrid, List, ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
-
-// UPDATE THIS SECTION IN YOUR FILE
 interface Product {
     id: number;
     name: string;
@@ -12,32 +9,26 @@ interface Product {
     original_price: number | null;
     image: string;
     category: string;
-    slug: string | null;         // Kept: Matches your production table schema
-    description?: string | null;  // Optional additions to keep interfaces tight
+    slug: string | null;
+    description?: string | null;
     stock?: number | null;
 }
-
 interface SubCategoryContentProps {
     initialProducts: Product[];
     overrideTitle: string;
 }
-
 export default function SubCategoryContent({ initialProducts = [], overrideTitle }: SubCategoryContentProps) {
-    // 1. Safe array fallback protection
     const productsArray = initialProducts || [];
-
     // Automatically find the highest price in this subcategory to calibrate the slider max limit
     const maxPriceCeiling = useMemo(() => {
         if (productsArray.length === 0) return 150000; // Safe default ceiling (KSH)
         return Math.max(...productsArray.map((p) => p.price));
     }, [productsArray]);
-
     const [priceRange, setPriceRange] = useState<number>(maxPriceCeiling);
     const [sortBy, setSortBy] = useState<string>("featured");
     const [viewLayout, setViewLayout] = useState<"grid-3" | "grid-4" | "list">("grid-3");
     const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
     const [isSortDropdownOpen, setIsSortDropdownOpen] = useState<boolean>(false);
-
     // 2. Reference the fallback array for your filter computations
     const filteredProducts = useMemo(() => {
         return productsArray
@@ -52,7 +43,6 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
     const resetFilters = () => {
         setPriceRange(maxPriceCeiling);
     };
-
     return (
         <main className="min-h-screen bg-white text-[#222]">
             {/* CATEGORY TITLE */}
@@ -61,7 +51,6 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
                     {overrideTitle}
                 </h1>
             </div>
-
             {/* DESKTOP FILTER BAR SYSTEM */}
             <div className="hidden lg:flex max-w-full mx-auto px-4 sm:px-6 lg:px-12 h-14 border-b border-[#E8E8E8] items-center justify-between text-xs tracking-wider text-neutral-500">
                 <div className="flex items-center gap-4">
@@ -75,11 +64,9 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
                         <List className="w-4 h-4 stroke-[1.5]" />
                     </button>
                 </div>
-
                 <div className="font-serif italic text-neutral-400">
                     {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"} found
                 </div>
-
                 <div className="relative">
                     <button onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)} className="flex items-center gap-1 cursor-pointer hover:text-black transition-colors select-none">
                         <span>Sort by ({sortBy === "featured" ? "Featured" : sortBy === "price-low" ? "Price low-high" : "Price high-low"})</span>
@@ -104,14 +91,12 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
                     )}
                 </div>
             </div>
-
             {/* MOBILE CONTROL BAR SYSTEM */}
             <div className="lg:hidden w-full border-b border-[#efefef] grid grid-cols-3 h-12 text-xs tracking-wider text-neutral-600 font-medium bg-white">
                 <button onClick={() => setIsMobileFilterOpen(true)} className="flex items-center justify-center gap-1.5 border-r border-[#efefef]">
                     <SlidersHorizontal className="w-3.5 h-3.5 text-neutral-400" />
                     <span>Filter</span>
                 </button>
-
                 <div className="relative flex items-center justify-center border-r border-[#efefef]">
                     <button onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)} className="flex items-center gap-1 w-full h-full justify-center">
                         <span>Sort by</span>
@@ -131,7 +116,6 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
                         </div>
                     )}
                 </div>
-
                 <div className="flex items-center justify-center gap-3">
                     <button onClick={() => setViewLayout("list")} className={viewLayout === "list" ? "text-black" : "text-neutral-300"}>
                         <List className="w-4 h-4" />
@@ -141,7 +125,6 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
                     </button>
                 </div>
             </div>
-
             {/* PRODUCT CATALOG CONTENT AREA */}
             <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-12 py-10 flex flex-col lg:flex-row gap-12">
                 {/* PERSISTENT SIDEBAR DESKTOP FILTER */}
@@ -171,7 +154,6 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
                         Reset Filters
                     </button>
                 </aside>
-
                 {/* DYNAMIC LAYOUT GRID SECTIONS */}
                 <section className="flex-1">
                     {filteredProducts.length === 0 ? (
@@ -196,7 +178,6 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
                     )}
                 </section>
             </div>
-
             {/* MOBILE DRAWER MODAL SHEET */}
             {isMobileFilterOpen && (
                 <div className="fixed inset-0 z-50 lg:hidden">
@@ -208,7 +189,6 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
                                 <X className="w-6 h-6" />
                             </button>
                         </div>
-
                         <div className="flex-1 overflow-auto p-6 space-y-8">
                             <div>
                                 <div className="text-[13px] font-medium tracking-widest mb-4 uppercase text-neutral-800">Price Range</div>
@@ -228,7 +208,6 @@ export default function SubCategoryContent({ initialProducts = [], overrideTitle
                                 </div>
                             </div>
                         </div>
-
                         <div className="border-t border-neutral-200 p-4 flex gap-3 bg-neutral-50">
                             <button onClick={resetFilters} className="flex-1 py-3.5 text-sm font-semibold border border-neutral-300 rounded-full bg-white text-neutral-700">
                                 Reset
