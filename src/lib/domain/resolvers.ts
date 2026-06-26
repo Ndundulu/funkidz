@@ -8,13 +8,13 @@ export async function getProducts(
 ) {
     const supabase = await createClient();
 
-    // 1. Cast the specific domain object to a flexible nested Record type
-    const domainConfig = domains[domain] as Record<string, Record<string, any>>;
+    const domainConfig = domains[domain];
 
-    // 2. Safe dynamic lookup using optional chaining
-    const config = domainConfig?.[key]?.[value];
+    // Type-safe way to access nested config
+    const config = domainConfig && typeof domainConfig === "object"
+        ? (domainConfig as Record<string, any>)[key]?.[value]
+        : undefined;
 
-    // 3. Fallback if the key/value combination doesn't exist
     if (!config) {
         return {
             error: "Invalid filter",
