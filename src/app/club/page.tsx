@@ -15,7 +15,7 @@ export default async function Page({ params }: PageProps) {
     );
 
     if (error) {
-        return <div>Coming soon.</div>;
+        return <div>Coming soon</div>;
     }
 
     return (
