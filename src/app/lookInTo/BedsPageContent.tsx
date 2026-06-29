@@ -40,7 +40,7 @@ export default function BedsPageContent({ initialProducts }: { initialProducts: 
 
 
 
-    // 2. Compute dynamic sub-categories (or product types) present ONLY among the beds
+    // 2. Compute dynamic sub-categories (or product types) present ONLY among the display
     const categoryCounts = useMemo(() => {
         const counts: Record<string, number> = {};
         onlyBeds.forEach((p) => {
@@ -49,7 +49,7 @@ export default function BedsPageContent({ initialProducts }: { initialProducts: 
         return counts;
     }, [onlyBeds]);
 
-    // 3. Apply active interactive UI filters onto the strict beds array
+    // 3. Apply active interactive UI filters onto the strict display array
     const filteredProducts = useMemo(() => {
         return onlyBeds
             .filter((product) => {

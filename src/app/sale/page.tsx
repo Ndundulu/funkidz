@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import SubCategoryContent from "@/app/beds/[filter]/SubCategoryContent";
+import SubCategoryContent from "@/app/display/SubCategoryContent";
 
 export default async function SalePage() {
     const supabase = await createClient();

@@ -14,7 +14,7 @@ type GuideKey = "HOME" | "EDUCATION" | "CLUB" | null;
 const menuData = {
     HOME: [
         { name: "Newborn", subtitle: "0 - 3 months", image: "/images/cribs/standardcrib/Standard-Cot.jpg", link: "/home/newborn" },
-        { name: "Infant", subtitle: "4 - 11 months", image: "/images/cribs/standardcrib/Infant-crib.jpeg", link: "/home/infant" },
+        { name: "Infant", subtitle: "4 - 11 months", image: "/images/cribs/standardcrib/infant-crib.jpeg", link: "/home/infant" },
         { name: "Toddler", subtitle: "1 - 3 years", image: "/images/juniorbeds/toddler-bed.png", link: "/home/toddler" },
         { name: "Tween", subtitle: "4 - 12 years", image: "/images/juniorbeds/Flower-bed-Junior-bed.jpg", link: "/home/tween" },
         { name: "Teen", subtitle: "13 - 19 years", image: "/images/juniorbeds/Junior-bed.jpg", link: "/home/teen" }

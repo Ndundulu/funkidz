@@ -1,8 +1,8 @@
 import { getProducts } from "@/lib/domain/resolvers";
-import SubCategoryContent from "@/app/beds/[filter]/SubCategoryContent";
+import SubCategoryContent from "@/app/display/SubCategoryContent";
 
 interface PageProps {
-    params: Promise<{ ageGroup: string }>;
+    params: { ageGroup: string };
 }
 
 export default async function Page({ params }: PageProps) {

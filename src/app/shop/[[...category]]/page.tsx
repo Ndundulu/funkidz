@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import SubCategoryContent from "@/app/beds/[filter]/SubCategoryContent";
+import SubCategoryContent from "@/app/display/SubCategoryContent";
 
 interface PageProps {
     params: Promise<{ category?: string[] }>;

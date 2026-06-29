@@ -82,7 +82,7 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                             <Link href="/home/infant" onClick={onClose} className="group text-center block">
 
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/cribs/standardcrib/Infant-crib.jpeg" alt="Infant" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
+                                    <Image src="/images/cribs/standardcrib/infant-crib.jpeg" alt="Infant" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
 
                                 <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">
