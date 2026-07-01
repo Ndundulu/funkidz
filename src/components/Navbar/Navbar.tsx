@@ -10,7 +10,7 @@ import MobileDrawer from "./MobileDrawer";
 
 const navLinks = [
     { href: "/shop", label: "SHOP ALL" },
-    { href: "#", label: "HOME", isGuideTrigger: true, guideKey: "HOME" as const },
+    { href: "#", label: "HOME FURNITURE", isGuideTrigger: true, guideKey: "HOME_FURNITURE" as const },
     { href: "#", label: "EDUCATION", isGuideTrigger: true, guideKey: "EDUCATION" as const },
     { href: "/hospital", label: "HOSPITAL" },
     { href: "/parent", label: "PARENT" },
@@ -19,7 +19,9 @@ const navLinks = [
     { href: "/#trade-in", label: "TRADE-IN" },
     { href: "/contact", label: "CONTACT" },
 ];
-export type GuideKey = "HOME" | "EDUCATION" | "CLUB" | null;
+
+export type GuideKey = "HOME_FURNITURE" | "EDUCATION" | "CLUB" | null;
+
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -133,14 +135,13 @@ export default function Navbar() {
                         }}
                         className={`p-2 rounded-full transition-all duration-200 ${isSearchOpen ? "bg-gray-100 text-black" : "hover:bg-gray-50 text-[#222]"}`}
                     >
-                        {isSearchOpen ? <X className="w-5 h-5 stroke-[1.75]" /> : <Search className="w-5 h-5 stroke-[1.75]" />}
+                        <Search className="w-5 h-5 stroke-[1.75]" />
                     </button>
 
                     <Link href="/account" onClick={closeAllGuides} className="hidden lg:flex p-2 hover:bg-gray-50 rounded-full transition-all text-[#222]">
                         <User className="w-5 h-5 stroke-[1.75]" />
                     </Link>
 
-                    {/* Cart Button SVG remain native here */}
                     <button className="p-2 hover:bg-gray-50 rounded-full transition-all text-[#222] relative flex items-center justify-center">
                         <svg viewBox="0 0 100 100" className="w-7 h-7 fill-none stroke-current" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M15 25 L35 25" /><path d="M35 25 L88 25 L80 68 L38 68 Z" /><path d="M43 68 L42 75" /><path d="M75 68 L76 75" /><circle cx="42" cy="79" r="4" className="fill-white" /><circle cx="76" cy="79" r="4" className="fill-white" /><path d="M48 25 L48 68" /><path d="M59 25 L58 68" /><path d="M69 25 L67 68" /><path d="M79 25 L76 68" /><path d="M36 39 L86 39" /><path d="M37 54 L83 54" /><ellipse cx="60" cy="17" rx="4" ry="8" className="fill-none" strokeWidth="3" />
@@ -150,9 +151,9 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/* ISOLATED SUB-PANELS */}
             <MegaMenu activeGuide={activeGuide} onClose={closeAllGuides} />
-            <SearchBar isSearchOpen={isSearchOpen} inputRef={searchInputRef} />
-            <MobileDrawer isOpen={isOpen} setIsOpen={setIsOpen} onClose={closeAllGuides} />        </header>
+            <SearchBar isSearchOpen={isSearchOpen} inputRef={searchInputRef} onClose={() => setIsSearchOpen(false)} />
+            <MobileDrawer isOpen={isOpen} setIsOpen={setIsOpen} onClose={closeAllGuides} />
+        </header>
     );
 }

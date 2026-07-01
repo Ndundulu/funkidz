@@ -11,7 +11,7 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
     if (!activeGuide) return null;
 
     const shopLinks = {
-        HOME: "/shop/home",
+        HOME_FURNITURE: "/shop/home",
         EDUCATION: "/shop/education",
         CLUB: "/shop/club",
     };
@@ -25,14 +25,14 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                 <div className="max-w-7xl mx-auto px-12 py-10 grid grid-cols-4 gap-8">
 
 
-                    {/* HOME MENU */}
-                    {activeGuide === "HOME" && (
+                    {/* HOME FURNITURE MENU */}
+                    {activeGuide === "HOME_FURNITURE" && (
                         <>
 
                             <div className="flex flex-col space-y-3.5 pt-2">
 
                                 <h3 className="font-serif text-base text-neutral-800 border-b border-neutral-100 pb-2">
-                                    Home
+                                    Home Furniture
                                 </h3>
 
                                 <Link href="/home/newborn" onClick={onClose} className="text-xs tracking-wider text-neutral-500 hover:text-black transition-colors">
@@ -60,7 +60,7 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                                     onClick={onClose}
                                     className="text-xs tracking-widest text-black font-bold uppercase pt-4 border-b border-black w-max pb-0.5 hover:opacity-70 transition-opacity"
                                 >
-                                    Shop All {activeGuide}
+                                    Shop All {activeGuide.replace("_", " ")}
                                 </Link>
 
                             </div>
@@ -167,7 +167,7 @@ export default function MegaMenu({ activeGuide, onClose }: MegaMenuProps) {
                             <Link href="/education/highschool" onClick={onClose} className="group text-center block">
 
                                 <div className="relative aspect-[4/3] bg-neutral-50 mb-2 overflow-hidden border border-neutral-100">
-                                    <Image src="/images/projects/school2.jpg" alt="High School" fill sizes="25vw" className="object-cover group-hover:text-black" />
+                                    <Image src="/images/projects/school2.jpg" alt="High School" fill sizes="25vw" className="object-cover group-hover:scale-102 transition-transform duration-300" />
                                 </div>
 
                                 <span className="text-[10px] tracking-widest text-neutral-400 uppercase font-medium group-hover:text-black">

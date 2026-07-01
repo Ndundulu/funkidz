@@ -27,3 +27,41 @@ body {
   font-family: Arial, Helvetica, sans-serif,system-ui, -apple-system, Inter;
   letter-spacing: -0.01em;
 }
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 2.5s infinite ease-in-out;
+}
+
+@keyframes swipeMove {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 1; }
+}
+
+@keyframes arrowLeft {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-3px); }
+}
+
+@keyframes arrowRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+
+.animate-swipeMove {
+  animation: swipeMove 2.8s infinite ease-in-out;
+}
+
+.animate-arrowLeft {
+  display: inline-block;
+  animation: arrowLeft 1.4s infinite ease-in-out;
+}
+
+.animate-arrowRight {
+  display: inline-block;
+  animation: arrowRight 1.4s infinite ease-in-out;
+}
